@@ -45,49 +45,51 @@ export default function MenuCard() {
       )}
 
       {/* Menu Card */}
-      <div className="absolute top-20 left-2 md:left-1/2 md:-translate-x-1/2 max-w-lg bg-white border shadow-lg  p-8 min-h-[100vh] z-10 w-[350px] md:w-[450px]">
-        <div className="border-2 custom-border p-1 min-h-[90vh] relative">
-          <div className="border border-black p-6 min-h-[89vh]">
-            <div className="flex justify-between items-center gap-4 mb-10">
-              <h2 className="text-lg font-semibold text-black uppercase">
-                Dilpasand Menu
-              </h2>
-              <span
-                className="text-sm font-medium
+      <div className="flex justify-center items-center h-screen">
+        <div className=" max-w-lg bg-white border shadow-lg pt-6 px-6 h-[80vh] z-10 w-[350px] md:w-[400px]">
+          <div className="border-2 custom-border p-1 h-[70vh] relative">
+            <div className="border border-black p-6 h-[67.5vh]">
+              <div className="flex justify-between items-center gap-4 mb-10">
+                <h2 className="text-lg font-semibold text-black uppercase">
+                  Dilpasand Menu
+                </h2>
+                <span
+                  className="text-sm font-medium
               "
-              >
-                03
-              </span>
-            </div>
-            <ul>
-              {restaurants.map((restaurant, index) => (
-                <li
-                  key={index}
-                  className="relative group border-b first:border-t border-black hover:bg-[#aa340d] hover:border-transparent transition-colors duration-300"
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
                 >
-                  <Link
-                    href={restaurant.link}
-                    className="block px-2 transition-colors duration-300"
+                  03
+                </span>
+              </div>
+              <ul>
+                {restaurants.map((restaurant, index) => (
+                  <li
+                    key={index}
+                    className="relative group border-b first:border-t border-black hover:bg-[#aa340d] hover:border-transparent transition-colors duration-300"
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
                   >
-                    <div className="flex items-center justify-between h-[60px]">
-                      <span className="text-black group-hover:text-white font-medium text-xl z-10">
-                        {restaurant.name}
-                      </span>
-                      <span className="text-black group-hover:text-white border-l border-black group-hover:border-transparent h-full flex items-center pl-4 z-10 transition-all duration-300">
-                        {/* <img
+                    <Link
+                      href={restaurant.link}
+                      className="block px-2 transition-colors duration-300"
+                    >
+                      <div className="flex items-center justify-between h-[60px]">
+                        <span className="text-black group-hover:text-white font-medium text-xl z-10">
+                          {restaurant.name}
+                        </span>
+                        <span className="text-black group-hover:text-white border-l border-black group-hover:border-transparent h-full flex items-center pl-4 z-10 transition-all duration-300">
+                          {/* <img
                           src="./images/right_arrow.svg"
                           alt=""
                           className="w-6"
                         /> */}
-                        <MoveRight className="transition-transform duration-300" />
-                      </span>
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+                          <MoveRight className="transition-transform duration-300" />
+                        </span>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

@@ -49,8 +49,8 @@ export default function AboutUsSection() {
 
   return (
     <>
-      <div className="bg-custom-primary text-white relative overflow-hidden">
-        <div className="flex flex-col md:flex-row justify-between pt-16 items-center gap-10 max-w-4xl mx-auto">
+      <div className="bg-custom-primary text-white relative overflow-hidden py-20 md:px-0 px-6">
+        <div className="flex flex-col md:flex-row justify-between pt-16 items-center gap-10 max-w-6xl mx-auto border custom-border p-8">
           {/* Left */}
           <div className="md:w-1/2 w-full flex items-center gap-4">
             <div className="flex flex-col items-center">
@@ -74,7 +74,9 @@ export default function AboutUsSection() {
 
           {/* Right */}
           <div className="md:w-1/2 w-full flex flex-col justify-center items-start gap-4 p-4">
-            <h5 className="text-2xl font-[400]">{content[step].heading}</h5>
+            <h5 className="text-2xl font-[400] text-white">
+              {content[step].heading}
+            </h5>
             <h3 className="text-custom-secondary text-4xl font-[500]">
               {content[step].title}
             </h3>

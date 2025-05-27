@@ -42,15 +42,16 @@ export default function MapInfoSection() {
     },
   ];
   return (
-    <section className="bg-custom-primary py-16">
+    <section className="bg-custom-primary py-20 md:px-0 px-4">
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12">
         {/* Map Section */}
         <div className="lg:w-1/2 w-full">
-          <div className="relative">
+          <div className="">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.9060656927622!2d-0.06617462472577375!3d51.514939310154226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876032480e42057%3A0xb7c86bdd21fc1816!2sDilpasand%20Restaurant!5e0!3m2!1sen!2s!4v1748265847189!5m2!1sen!2s"
-              width="600"
-              height="450"
+              width="100%"
+              height="250"
+              className="sm:h-[300px] md:h-[350px] lg:h-[350px] xl:h-[400px] 2xl:h-[450px] w-full rounded-lg shadow-lg"
               allowFullScreen
               loading="lazy"
               style={{ borderRadius: "12px" }}

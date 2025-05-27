@@ -1,9 +1,48 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import NewsletterForm from "./newsLetterForm";
 
 export default function NewsLetterSection() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  // Animation variants for Framer Motion
+  const formVariants = {
+    hidden: { x: "100%", opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
   return (
-    <div className="flex justify-between flex-wrap">
+    <div ref={sectionRef} className="flex justify-between flex-wrap">
       <div className="md:w-[70%]">
         <video
           autoPlay
@@ -15,7 +54,13 @@ export default function NewsLetterSection() {
         />
       </div>
       <div className="md:w-[30%]">
-        <NewsletterForm />
+        <motion.div
+          initial="hidden"
+          animate={isVisible ? "visible" : "hidden"}
+          variants={formVariants}
+        >
+          <NewsletterForm />
+        </motion.div>
       </div>
     </div>
   );
