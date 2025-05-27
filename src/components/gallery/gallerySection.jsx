@@ -80,7 +80,7 @@ export default function GallerySection() {
             className="relative group border-none text-custom-secondary outline-none cursor-pointer mt-2 p-1"
           >
             View Gallery
-            <span className="absolute bottom-0 left-0 w-full h-[2px] bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            <span className="absolute bottom-0 left-0 w-full h-[2px] bg-custom-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
           </button>
         </motion.div>
       )}
