@@ -1,0 +1,45 @@
+@import "tailwindcss";
+:root {
+  --font-local: "Ghotam";
+  --primary: #120901;
+  --secondary: #aa340d;
+}
+html,
+body {
+  font-family: var(--font-local), sans-serif;
+  scroll-behavior: smooth;
+  scrollbar-width: 0px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: auto;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.bg-custom-primary {
+  background-color: var(--primary);
+}
+
+:root {
+  --primary: #120901;
+  --border: #aa340d;
+}
+
+.bg-custom-primary {
+  background-color: var(--primary);
+}
+.text-custom-primary {
+  color: var(--primary);
+}
+.text-custom-secondary {
+  color: var(--secondary);
+}
+.bg-custom-secondary {
+  background-color: var(--secondary);
+}
+.custom-border {
+  color: var(--border);
+}
+.gallery_section {
+  background-image: url("/images/gallery_banner.png");
+}
