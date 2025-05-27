@@ -1,34 +1,10 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import React, { useRef, useState, useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function GalleryCards({ onClose }) {
-  const galleryRef = useRef(null);
-
   const galleryImages = [
-    {
-      src: "https://restaurant-amici.com/wp-content/uploads/2024/04/AMICI-15-480x600.jpg",
-      rotate: "-5deg",
-      top: "0px",
-    },
-    {
-      src: "https://restaurant-amici.com/wp-content/uploads/2024/04/AmiciLesquin_Satycation11-480x600.jpg",
-      rotate: "2deg",
-      top: "50px",
-    },
-    {
-      src: "https://restaurant-amici.com/wp-content/uploads/2024/03/371A7419-480x720.jpg",
-      rotate: "-5deg",
-      top: "-40px",
-    },
-    {
-      src: "https://restaurant-amici.com/wp-content/uploads/2024/03/SophiaCocktail.jpg",
-      rotate: "2deg",
-      top: "20px",
-    },
     {
       src: "https://restaurant-amici.com/wp-content/uploads/2024/04/AMICI-15-480x600.jpg",
       rotate: "-5deg",
@@ -51,58 +27,59 @@ export default function GalleryCards({ onClose }) {
     },
   ];
 
-  useEffect(() => {
-    gsap.fromTo(
-      galleryRef.current,
-      { x: 100, opacity: 0 },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power3.out",
-      }
-    );
-  }, []);
+  const duplicatedImages = [...galleryImages, ...galleryImages]; // for seamless looping
+  const controls = useAnimation();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const imageWidth = 300; // image width + gap
 
   useEffect(() => {
-    const images = gsap.utils.toArray(".gallery-image");
+    const interval = setInterval(() => {
+      moveNext();
+    }, 2000);
 
-    gsap.fromTo(
-      images,
-      { x: 1000 },
-      {
-        x: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: galleryRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1,
-        },
-      }
-    );
-  }, []);
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
+  const moveNext = () => {
+    const newIndex = currentIndex + 1;
+
+    // If we've reached end of first set, reset immediately and continue
+    if (newIndex >= galleryImages.length) {
+      controls.set({ x: 0 }); // jump without animation
+      setCurrentIndex(1); // move to second image
+      controls.start({
+        x: -imageWidth,
+        transition: { type: "tween", duration: 0.6 },
+      });
+    } else {
+      controls.start({
+        x: -newIndex * imageWidth,
+        transition: { type: "tween", duration: 0.6 },
+      });
+      setCurrentIndex(newIndex);
+    }
+  };
 
   return (
-    <div
-      ref={galleryRef}
-      className="relative flex gap-10 bg-custom-primary p-4 min-h-screen items-center overflow-hidden w-full"
-    >
-      {galleryImages.map((img, index) => (
-        <img
-          key={index}
-          src={img.src}
-          alt={`Gallery ${index + 1}`}
-          className="gallery-image w-72 h-[400px] object-cover shadow-md hover:scale-105 transition-transform duration-300 border-2 custom-border p-2 relative"
-          style={{
-            transform: `rotate(${img.rotate})`,
-            top: img.top,
-          }}
-        />
-      ))}
+    <div className="relative flex gap-10 bg-custom-primary p-4 min-h-screen items-center overflow-hidden w-full">
+      <motion.div className="flex gap-10" animate={controls} initial={{ x: 0 }}>
+        {duplicatedImages.map((img, index) => (
+          <motion.img
+            key={`${img.src}-${index}`}
+            src={img.src}
+            alt={`Gallery ${index + 1}`}
+            className="gallery-image w-72 h-[400px] object-cover shadow-md border-2 custom-border p-2"
+            style={{
+              transform: `rotate(${img.rotate})`,
+              top: img.top,
+            }}
+          />
+        ))}
+      </motion.div>
+
       <button
         onClick={onClose}
-        className="absolute bottom-10 right-4 bg-white text-black px-3 py-1 rounded-lg shadow hover:bg-gray-200 transition"
+        className="absolute bottom-10 right-4 bg-white text-black px-3 py-1 rounded-lg shadow hover:bg-gray-200 transition z-10"
       >
         Close
       </button>

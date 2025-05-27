@@ -5,7 +5,7 @@ import GalleryCards from "./galleryCards";
 
 export default function GallerySection() {
   const [showGallery, setShowGallery] = useState(false);
-  const [isVisible, setIsVisible] = useState(false); // State to trigger animation
+  const [isVisible, setIsVisible] = useState(false); // State to trigger intro card animation
   const sectionRef = useRef(null); // Ref to observe the section
 
   // Handle click to show gallery and scroll
@@ -47,9 +47,19 @@ export default function GallerySection() {
     };
   }, []);
 
-  // Animation variants for Framer Motion
+  // Animation variants for Framer Motion (intro card)
   const boxVariants = {
-    hidden: { x: "-100%", opacity: 0 }, // Start off-screen to the right
+    hidden: { x: "-100%", opacity: 0 }, // Start off-screen to the left
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeOut" },
+    }, // Slide to original position
+  };
+
+  // Animation variants for GalleryCards
+  const galleryVariants = {
+    hidden: { x: "100%", opacity: 0 }, // Start off-screen to the right
     visible: {
       x: 0,
       opacity: 1,
@@ -69,12 +79,14 @@ export default function GallerySection() {
           animate={isVisible ? "visible" : "hidden"}
           variants={boxVariants}
         >
-          It's 1949, and the thrill of the Talkies era is in full swing. While
-          cine stars chatter self-importantly, the wealthy hobnob with the
-          beautiful, the rakish and the occasional ne'er-do-wells. Stop – admire
-          our walls. The myriad of artefacts, photographs, portraits,
-          collectables. In their stillness they depict the vivacity, life and
-          glamour of 1930s and 40s Bombay.
+          <p className="text-sm">
+            It's 1949, and the thrill of the Talkies era is in full swing. While
+            cine stars chatter self-importantly, the wealthy hobnob with the
+            beautiful, the rakish and the occasional ne'er-do-wells. Stop –
+            admire our walls. The myriad of artefacts, photographs, portraits,
+            collectables. In their stillness they depict the vivacity, life and
+            glamour of 1930s and 40s Bombay.
+          </p>
           <button
             onClick={handleClick}
             className="relative group border-none text-custom-secondary outline-none cursor-pointer mt-2 p-1"
@@ -86,9 +98,14 @@ export default function GallerySection() {
       )}
 
       {showGallery && (
-        <div id="gallery-cards">
+        <motion.div
+          id="gallery-cards"
+          initial="hidden"
+          animate="visible"
+          variants={galleryVariants}
+        >
           <GalleryCards onClose={handleClose} />
-        </div>
+        </motion.div>
       )}
     </div>
   );

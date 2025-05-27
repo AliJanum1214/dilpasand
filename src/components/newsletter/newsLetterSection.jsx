@@ -49,7 +49,7 @@ export default function NewsLetterSection() {
           loop
           muted
           playsInline
-          className="object-cover w-[100vw] h-[100vh] max-w-none rounded-lg"
+          className="object-cover w-[100vw] h-[100vh] max-w-none"
           src="https://res.cloudinary.com/dlorogzhe/video/upload/v1747915245/Restaurant_Ad_Video_Template__Editable_.mp4_1747914072760.mp4_1747914612518_erutzt.mp4"
         />
       </div>

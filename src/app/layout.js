@@ -9,12 +9,12 @@ const geistSans = Geist({
 const customFont = localFont({
   src: [
     {
-      path: "../../public/fonts/Gotham-Black.otf",
+      path: "../../public/fonts/Gill Sans.otf", // Path to Gill Sans for paragraphs
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Gotham-Bold.otf",
+      path: "../../public/fonts/Futura Bold.ttf", // Path to Futura Bold for headings
       weight: "700",
       style: "normal",
     },
@@ -30,9 +30,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${customFont.variable} font-custom antialiased`}
-      >
+      <body className={`${customFont.variable} font-custom antialiased`}>
         {children}
       </body>
     </html>
