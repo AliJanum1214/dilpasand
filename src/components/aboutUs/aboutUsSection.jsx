@@ -50,7 +50,7 @@ export default function AboutUsSection() {
   return (
     <>
       <div className="bg-custom-primary text-white relative overflow-hidden border border-white md:px-0 px-6 h-screen flex justify-center items-center">
-        <div className="flex flex-col md:flex-row justify-between pt-16 items-center gap-10 max-w-6xl mx-auto border custom-border p-8">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-10 max-w-6xl mx-auto border custom-border p-8">
           {/* Left */}
           <div className="md:w-[30%] w-full flex items-center gap-4">
             <div className="flex flex-col items-center">
@@ -81,12 +81,12 @@ export default function AboutUsSection() {
               {content[step].title}
             </h3>
             <p className="text-white">{content[step].text}</p>
-            <button className="relative group border-none text-white outline-none cursor-pointer mt-2 p-1 capitalize flex gap-3 items-center">
+            <button className="relative group border-none text-custom-secondary outline-none cursor-pointer mt-2 p-1 capitalize flex gap-3 items-center">
               Read more about the story{" "}
               <span>
                 <MoveRight />
               </span>
-              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-custom-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
             </button>
           </div>
         </div>
