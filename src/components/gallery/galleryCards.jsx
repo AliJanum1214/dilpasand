@@ -29,12 +29,32 @@ export default function GalleryCards({ onClose }) {
       rotate: "2deg",
       top: "20px",
     },
+    {
+      src: "https://restaurant-amici.com/wp-content/uploads/2024/04/AMICI-15-480x600.jpg",
+      rotate: "-5deg",
+      top: "0px",
+    },
+    {
+      src: "https://restaurant-amici.com/wp-content/uploads/2024/04/AmiciLesquin_Satycation11-480x600.jpg",
+      rotate: "2deg",
+      top: "50px",
+    },
+    {
+      src: "https://restaurant-amici.com/wp-content/uploads/2024/03/371A7419-480x720.jpg",
+      rotate: "-5deg",
+      top: "-40px",
+    },
+    {
+      src: "https://restaurant-amici.com/wp-content/uploads/2024/03/SophiaCocktail.jpg",
+      rotate: "2deg",
+      top: "20px",
+    },
   ];
 
   useEffect(() => {
     gsap.fromTo(
       galleryRef.current,
-      { x: 300, opacity: 0 },
+      { x: 100, opacity: 0 },
       {
         x: 0,
         opacity: 1,
@@ -66,7 +86,7 @@ export default function GalleryCards({ onClose }) {
   return (
     <div
       ref={galleryRef}
-      className="relative flex gap-10 bg-custom-primary p-4 justify-center min-h-screen items-center overflow-hidden w-full"
+      className="relative flex gap-10 bg-custom-primary p-4 min-h-screen items-center overflow-hidden w-full"
     >
       {galleryImages.map((img, index) => (
         <img
