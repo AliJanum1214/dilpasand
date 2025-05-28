@@ -11,7 +11,7 @@ export default function MenuBar({ isFixed = true }) {
 
   return (
     <div className={baseClass}>
-      <div className="max-w-6xl mx-auto p-1 flex justify-center gap-6 flex-wrap">
+      <div className="max-w-6xl mx-auto p-1 flex justify-center gap-6 flex-wrap shadow-2xl">
         {menuLinks.map((link, index) => (
           <a
             key={index}

@@ -6,6 +6,7 @@ export default function MapInfoSection() {
       title: "Find Us",
       content: ["Dilpasand"],
       isBold: true,
+      noBorder: true, // Flag to indicate no border
     },
     {
       title: "Hours",
@@ -14,6 +15,7 @@ export default function MapInfoSection() {
     {
       title: "Contact",
       content: ["Send us an email"],
+      noBorder: true, // Flag to indicate no border
     },
     {
       title: "Nearby Stops",
@@ -41,8 +43,9 @@ export default function MapInfoSection() {
       spanTwo: true, // Flag to indicate this section spans two columns
     },
   ];
+
   return (
-    <section className="bg-custom-primary py-20 md:px-0 px-4">
+    <section className="bg-custom-primary pb-20 md:px-0 px-4">
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12">
         {/* Map Section */}
         <div className="lg:w-1/2 w-full">
@@ -63,21 +66,36 @@ export default function MapInfoSection() {
         {/* Info Sections */}
         <div className="lg:w-1/2 w-full grid grid-cols-1 sm:grid-cols-2 gap-2">
           {infoSections.map((section, index) => (
-            <div key={index} className={section.spanTwo ? "" : ""}>
-              <h3 className="text-lg font-[400] text-white uppercase">
+            <div
+              key={index}
+              className={`
+                ${section.spanTwo ? "col-span-2" : ""}
+                ${
+                  !section.noBorder
+                    ? "border border-gray-300 p-2 rounded-md"
+                    : "p-2"
+                }
+              `}
+            >
+              <h3
+                className={`
+                  text-lg font-[400] uppercase
+                  ${
+                    section.title === "Find Us" || section.title === "Contact"
+                      ? "text-yellow-500"
+                      : "text-custom-secondary"
+                  }
+                `}
+              >
                 {section.title}
               </h3>
               {section.content.map((line, lineIndex) => (
-                <p
-                  key={lineIndex}
-                  className={`
-                text-sm text-gray-200`}
-                >
+                <p key={lineIndex} className="text-sm text-gray-200">
                   {line}
                 </p>
               ))}
             </div>
-          ))}{" "}
+          ))}
         </div>
       </div>
     </section>

@@ -12,26 +12,19 @@ export default function AboutUsSection() {
     {
       heading: "Our Story",
       title: "From Karachi to London",
-      text: `In 2001, Asghar Khan arrived in London with a dream: to bring In the bustling streets of Karachi, Dilpasand began as a humble eatery in 1949, serving soulful dishes that blended the vibrant flavors of South Asia with the warmth of home. Founded by a family passionate about food and community, it quickly became a beloved gathering spot where stories were shared over plates of aromatic biryani and delicate sweets.`,
+      text: `In 2001, Asghar Khan arrived in London with a dream: to bring the rich culinary heritage of Karachi to a new audience. In the bustling streets of Karachi, Dilpasand began as a humble eatery in 1949, serving soulful dishes that blended the vibrant flavors of South Asia with the warmth of home. Founded by a family passionate about food and community, it quickly became a beloved gathering spot where stories were shared over plates of aromatic biryani and delicate sweets.`,
     },
     {
       heading: "Our Growth",
       title: "More Than Just a Restaurant",
-      text: `In 2001, Asghar Khan arrived in London with a dream: to bring In the bustling streets of Karachi, Dilpasand began as a humble eatery in 1949, serving soulful dishes that blended the vibrant flavors of South Asia with the warmth of home. Founded by a family passionate about food and community, it quickly became a beloved gathering spot where stories were shared over plates of aromatic biryani and delicate sweets. `,
+      text: `From its modest beginnings, Dilpasand has grown into a cherished name, expanding its reach while staying true to its roots. In 2001, Asghar Khan brought the legacy to London, introducing authentic flavors to a global palate. Our growth reflects our commitment to quality and community, with each location becoming a hub for cultural exchange and culinary excellence.`,
     },
     {
       heading: "Today & Beyond",
       title: "Carrying the Flame Forward",
-      text: `In 2001, Asghar Khan arrived in London with a dream: to bring In the bustling streets of Karachi, Dilpasand began as a humble eatery in 1949, serving soulful dishes that blended the vibrant flavors of South Asia with the warmth of home. Founded by a family passionate about food and community, it quickly became a beloved gathering spot where stories were shared over plates of aromatic biryani and delicate sweets. `,
+      text: `Today, Dilpasand continues to thrive, with locations in Karachi and London, preserving the traditions of 1949 while embracing innovation. We look forward to sharing our journey, connecting with new generations, and keeping the spirit of Dilpasand alive for years to come.`,
     },
   ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStep((prev) => (prev + 1) % content.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,18 +45,39 @@ export default function AboutUsSection() {
       <div className="bg-custom-primary text-white relative overflow-hidden md:px-0 px-6 py-20 flex justify-center items-center">
         <div className="flex flex-col md:flex-row justify-between items-center gap-10 max-w-6xl mx-auto border custom-border p-8">
           {/* Left */}
-          <div className="md:w-[30%] w-full flex items-center gap-4">
-            <div className="flex flex-col items-center">
-              <input
-                type="range"
-                min="0"
-                max="2"
-                step="1"
-                value={step}
-                onChange={(e) => setStep(parseInt(e.target.value))}
-                className="h-80 w-2 cursor-pointer appearance-none bg-white rounded-full accent-custom-secondary"
-                style={{ writingMode: "vertical-lr" }}
-              />
+          <div className="md:w-[40%] w-full flex items-center gap-4">
+            <div className="flex flex-col items-center relative">
+              {/* Labels for Steps */}
+              <div className="relative h-80 flex flex-col justify-between items-center">
+                {content.map((item, index) => (
+                  <span
+                    key={index}
+                    className={`absolute text-base ${
+                      step === index
+                        ? "text-custom-secondary font-semibold"
+                        : "text-white"
+                    } ${
+                      index === 0
+                        ? "top-0"
+                        : index === 1
+                        ? "top-1/2 transform -translate-y-1/2"
+                        : "bottom-0"
+                    }`}
+                  >
+                    {item.heading}
+                  </span>
+                ))}
+                <input
+                  type="range"
+                  min="0"
+                  max={content.length - 1}
+                  step="1"
+                  value={step}
+                  onChange={(e) => setStep(parseInt(e.target.value))}
+                  className="h-80 w-2 cursor-pointer appearance-none bg-white rounded-full accent-custom-secondary ml-36"
+                  style={{ writingMode: "vertical-lr" }}
+                />
+              </div>
             </div>
             <img
               src="./images/author.png"
@@ -73,7 +87,7 @@ export default function AboutUsSection() {
           </div>
 
           {/* Right */}
-          <div className="md:w-[70%] w-full flex flex-col justify-center items-start gap-4 p-4">
+          <div className="md:w-[60%] w-full flex flex-col justify-center items-start gap-4 p-4">
             <h5 className="text-2xl font-[400] text-custom-secondary">
               {content[step].heading}
             </h5>
