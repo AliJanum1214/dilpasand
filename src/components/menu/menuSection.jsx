@@ -73,7 +73,7 @@ export default function MenuSection() {
           <div className="hidden md:block w-px bg-custom-secondary self-stretch my-4"></div>
 
           {/* Right Side: Drinks and Desserts */}
-          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="flex-1 grid grid-cols-1 md:grid-cols-2">
             {rightItems.map((item, index) => (
               <MenuCard
                 key={index}

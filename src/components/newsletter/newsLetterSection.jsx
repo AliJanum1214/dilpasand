@@ -47,7 +47,7 @@ export default function NewsletterSection() {
         initial={{ x: 100, opacity: 0 }}
         animate={isInView ? { x: 0, opacity: 1 } : {}}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="bg-custom-primary text-white p-8 flex items-center"
+        className="bg-custom-primary text-white p-4 md:p-8 flex items-center"
       >
         <form onSubmit={handleSubmit} className="w-full max-w-lg space-y-6">
           <h2 className="text-sm text-yellow-500 tracking-widest font-semibold">

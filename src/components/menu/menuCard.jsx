@@ -8,7 +8,7 @@ export default function MenuCard({
   isRightSide = false,
 }) {
   return (
-    <div className="rounded-lg shadow-md p-4">
+    <div className="rounded-lg shadow-md md:p-4 p-0">
       {isRightSide ? (
         <>
           <img

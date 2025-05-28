@@ -67,7 +67,7 @@ export default function VideoBanner() {
         <h1 className="text-3xl md:text-6xl font-bold drop-shadow-lg">
           “ From Karachi With Love ”
         </h1>
-        <p className="py-3">
+        <p className="py-3 max-w-sm text-center md:max-w-2xl">
           Experience the authentic taste of Karachi's Burns road in heart of
           London
         </p>
