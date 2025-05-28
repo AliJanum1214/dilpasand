@@ -38,7 +38,7 @@ export default function Navbar() {
                   href={link.href}
                   className="text-sm lg:text-base hover:text-yellow-400 transition-colors duration-200"
                 >
-                  {link.name}
+                  <h4>{link.name}</h4>
                 </Link>
               </li>
             ))}
@@ -75,7 +75,7 @@ export default function Navbar() {
                     onClick={toggleMenu}
                     className="text-lg hover:text-yellow-400 transition-colors duration-200"
                   >
-                    {link.name}
+                    <h4>{link.name}</h4>
                   </Link>
                 </li>
               ))}

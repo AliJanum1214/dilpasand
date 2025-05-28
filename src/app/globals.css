@@ -2,6 +2,9 @@
 :root {
   --primary: #120901;
   --secondary: #aa340d;
+  --font-paragraph: "Gill Sans", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-heading: "Futura", sans-serif;
 }
 html,
 body {
@@ -17,13 +20,21 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Futura", sans-serif;
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-weight: 500;
+}
+button {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  height: 40px;
 }
 p {
-  font-family: "Gill Sans", sans-serif;
-  font-weight: 400;
+  font-weight: 300;
+  word-spacing: 5px;
+  letter-spacing: normal;
+  font-size: 20px;
 }
+
 ::-webkit-scrollbar {
   display: none;
 }

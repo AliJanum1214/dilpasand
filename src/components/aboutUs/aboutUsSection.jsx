@@ -49,7 +49,7 @@ export default function AboutUsSection() {
 
   return (
     <>
-      <div className="bg-custom-primary text-white relative overflow-hidden border border-white md:px-0 px-6 h-screen flex justify-center items-center">
+      <div className="bg-custom-primary text-white relative overflow-hidden md:px-0 px-6 h-screen flex justify-center items-center">
         <div className="flex flex-col md:flex-row justify-between items-center gap-10 max-w-6xl mx-auto border custom-border p-8">
           {/* Left */}
           <div className="md:w-[30%] w-full flex items-center gap-4">
