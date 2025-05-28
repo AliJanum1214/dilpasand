@@ -64,7 +64,7 @@ export default function VideoBanner() {
         src="https://res.cloudinary.com/dlorogzhe/video/upload/v1747915245/Restaurant_Ad_Video_Template__Editable_.mp4_1747914072760.mp4_1747914612518_erutzt.mp4"
       />
       <div className="absolute inset-0 text-white flex items-center flex-col justify-center pointer-events-none">
-        <h1 className="text-3xl md:text-5xl font-bold drop-shadow-lg">
+        <h1 className="text-3xl md:text-6xl font-bold drop-shadow-lg">
           “ From Karachi With Love ”
         </h1>
         <p className="py-3">
