@@ -16,13 +16,14 @@ export default function MenuBar({ isFixed = true }) {
           <a
             key={index}
             href={link.href}
-            className={`text-white text-lg hover:text-yellow-400 transition-colors duration-300 ${
+            className={`text-white text-xl hover:text-[#120901] transition-colors duration-300 flex items-center h-[30px] ${
               index < menuLinks.length - 1
-                ? "after:content-['•'] after:ml-6 after:text-white"
+                ? "after:content-['•'] after:ml-6 after:text-white after:align-middle"
                 : ""
             }`}
           >
-            {link.name}
+            <h4 className="text-[18px]">{link.name}</h4>{" "}
+            {/* Reduced font size if needed */}
           </a>
         ))}
       </div>

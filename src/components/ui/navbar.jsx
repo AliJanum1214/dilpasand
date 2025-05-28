@@ -51,7 +51,7 @@ export default function Navbar() {
             Dilpasand
           </h2>
           <div className="flex items-center">
-            <button className="hidden md:inline-block bg-custom-secondary px-4 py-1 rounded-md text-sm lg:text-base hover:bg-opacity-90 transition">
+            <button className="hidden md:inline-block bg-custom-secondary px-4 py-1 rounded-md text-sm lg:text-base transition custom-hover-bg-opacity">
               Book a Table
             </button>
             <button
@@ -87,7 +87,7 @@ export default function Navbar() {
               ))}
             </ul>
             <button
-              className="mt-8 bg-custom-secondary px-4 py-2 rounded-md text-base hover:bg-opacity-90 transition"
+              className="mt-8 bg-custom-secondary px-4 py-2 rounded-md text-base hover:bg-opacity-90 transition custom-hover-bg-opacity"
               onClick={toggleMenu}
             >
               Book a Table

@@ -5,7 +5,7 @@ import "./globals.css";
 const gillSans = localFont({
   src: "../../public/fonts/Gill Sans Light.otf",
   variable: "--font-paragraph",
-  weight: "300",
+  weight: "400",
   style: "normal",
   display: "swap",
 });

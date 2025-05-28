@@ -29,8 +29,13 @@ button {
   font-weight: 500;
   height: 40px;
   font-size: 18px;
+  cursor: pointer;
+}
+.custom-hover-bg-opacity:hover {
+  background-color: rgba(170, 52, 13, 0.75); /* #aa340d with 75% opacity */
 }
 p {
+  font-family: var(--font-paragraph);
   font-weight: 300;
   word-spacing: 5px;
   letter-spacing: normal;
