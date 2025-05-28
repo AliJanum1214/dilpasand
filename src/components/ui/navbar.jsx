@@ -36,9 +36,12 @@ export default function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-sm lg:text-base hover:text-yellow-400 transition-colors duration-200"
+                  className="text-sm lg:text-base hover:text-[#aa340d] transition-colors duration-200"
                 >
-                  <h4 className="text-[18px]">{link.name}</h4>
+                  <h4 className="text-[18px] relative group">
+                    {link.name}
+                    <span className="absolute bottom-0 -mb-1 left-0 w-full h-[2px] bg-custom-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center" />
+                  </h4>
                 </Link>
               </li>
             ))}
@@ -73,9 +76,12 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={toggleMenu}
-                    className="text-lg hover:text-yellow-400 transition-colors duration-200"
+                    className="text-lg hover:text-[#aa340d] transition-colors duration-200"
                   >
-                    <h4>{link.name}</h4>
+                    <h4 className="relative group">
+                      {link.name}
+                      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-custom-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center" />
+                    </h4>
                   </Link>
                 </li>
               ))}
