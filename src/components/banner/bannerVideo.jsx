@@ -71,7 +71,7 @@ export default function VideoBanner() {
           Experience the authentic taste of Karachi's Burns road in heart of
           London
         </p>
-        <button className="bg-custom-secondary px-4 py-1.5 rounded-lg text-base">
+        <button className="bg-custom-secondary px-4 h-[50px] rounded-lg text-base">
           Book a table
         </button>
       </div>
