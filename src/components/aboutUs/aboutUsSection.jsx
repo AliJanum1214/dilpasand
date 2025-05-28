@@ -12,17 +12,17 @@ export default function AboutUsSection() {
     {
       heading: "Our Story",
       title: "From Karachi to London",
-      text: `In 2001, Asghar Khan arrived in London with a dream: to bring In the bustling streets of Karachi, Dilpasand began as a humble eatery in 1949, serving soulful dishes that blended the vibrant flavors of South Asia with the warmth of home. Founded by a family passionate about food and community, it quickly became a beloved gathering spot where stories were shared over plates of aromatic biryani and delicate sweets.Decades later, this legacy crossed oceans to London, where Dilpasand Restaurant now stands as a beacon of heritage and hospitality. Here, we continue to honor our roots, offering a menu that tells the story of Karachi’s bustling markets and London’s cosmopolitan charm, inviting guests to savor a taste of history with every bite.`,
+      text: `In 2001, Asghar Khan arrived in London with a dream: to bring In the bustling streets of Karachi, Dilpasand began as a humble eatery in 1949, serving soulful dishes that blended the vibrant flavors of South Asia with the warmth of home. Founded by a family passionate about food and community, it quickly became a beloved gathering spot where stories were shared over plates of aromatic biryani and delicate sweets.`,
     },
     {
       heading: "Our Growth",
       title: "More Than Just a Restaurant",
-      text: `In 2001, Asghar Khan arrived in London with a dream: to bring In the bustling streets of Karachi, Dilpasand began as a humble eatery in 1949, serving soulful dishes that blended the vibrant flavors of South Asia with the warmth of home. Founded by a family passionate about food and community, it quickly became a beloved gathering spot where stories were shared over plates of aromatic biryani and delicate sweets. Decades later, this legacy crossed oceans to London, where Dilpasand Restaurant now stands as a beacon of heritage and hospitality. Here, we continue to honor our roots, offering a menu that tells the story of Karachi’s bustling markets and London’s cosmopolitan charm, inviting guests to savor a taste of history with every bite.`,
+      text: `In 2001, Asghar Khan arrived in London with a dream: to bring In the bustling streets of Karachi, Dilpasand began as a humble eatery in 1949, serving soulful dishes that blended the vibrant flavors of South Asia with the warmth of home. Founded by a family passionate about food and community, it quickly became a beloved gathering spot where stories were shared over plates of aromatic biryani and delicate sweets. `,
     },
     {
       heading: "Today & Beyond",
       title: "Carrying the Flame Forward",
-      text: `In 2001, Asghar Khan arrived in London with a dream: to bring In the bustling streets of Karachi, Dilpasand began as a humble eatery in 1949, serving soulful dishes that blended the vibrant flavors of South Asia with the warmth of home. Founded by a family passionate about food and community, it quickly became a beloved gathering spot where stories were shared over plates of aromatic biryani and delicate sweets. Decades later, this legacy crossed oceans to London, where Dilpasand Restaurant now stands as a beacon of heritage and hospitality. Here, we continue to honor our roots, offering a menu that tells the story of Karachi’s bustling markets and London’s cosmopolitan charm, inviting guests to savor a taste of history with every bite.`,
+      text: `In 2001, Asghar Khan arrived in London with a dream: to bring In the bustling streets of Karachi, Dilpasand began as a humble eatery in 1949, serving soulful dishes that blended the vibrant flavors of South Asia with the warmth of home. Founded by a family passionate about food and community, it quickly became a beloved gathering spot where stories were shared over plates of aromatic biryani and delicate sweets. `,
     },
   ];
 

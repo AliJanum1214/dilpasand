@@ -38,7 +38,7 @@ export default function Navbar() {
                   href={link.href}
                   className="text-sm lg:text-base hover:text-yellow-400 transition-colors duration-200"
                 >
-                  <h4>{link.name}</h4>
+                  <h4 className="text-[18px]">{link.name}</h4>
                 </Link>
               </li>
             ))}
@@ -48,7 +48,7 @@ export default function Navbar() {
             Dilpasand
           </h2>
           <div className="flex items-center">
-            <button className="hidden md:inline-block bg-custom-secondary px-4 py-1 rounded-lg text-sm lg:text-base hover:bg-opacity-90 transition">
+            <button className="hidden md:inline-block bg-custom-secondary px-4 py-1 rounded-md text-sm lg:text-base hover:bg-opacity-90 transition">
               Book a Table
             </button>
             <button
@@ -81,7 +81,7 @@ export default function Navbar() {
               ))}
             </ul>
             <button
-              className="mt-8 bg-custom-secondary px-4 py-2 rounded-lg text-base hover:bg-opacity-90 transition"
+              className="mt-8 bg-custom-secondary px-4 py-2 rounded-md text-base hover:bg-opacity-90 transition"
               onClick={toggleMenu}
             >
               Book a Table
