@@ -7,6 +7,7 @@ import GallerySection from "@/components/gallery/gallerySection";
 import MapInfoSection from "@/components/map/mapInfoSection";
 import MenuSection from "@/components/menu/menuSection";
 import NewsLetterSection from "@/components/newsletter/newsLetterSection";
+import Footer from "@/components/ui/footer";
 import Navbar from "@/components/ui/navbar";
 import Image from "next/image";
 
@@ -21,6 +22,7 @@ export default function Home() {
       <MapInfoSection />
       <GallerySection />
       <NewsLetterSection />
+      <Footer />
       {/* <BlogSection /> */}
     </>
   );
