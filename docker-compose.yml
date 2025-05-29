@@ -8,7 +8,5 @@ services:
     ports:
       - "3008:3000"
     restart: unless-stopped
-    env_file:
-      - .env  # Specifies which .env file to use
     environment:
       - NODE_ENV=production
