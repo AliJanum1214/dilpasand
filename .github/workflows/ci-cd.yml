@@ -1,0 +1,72 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build
+        run: npm run build
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ghcr.io/husnain6666/dilpasand:latest
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to VM
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VM_IP }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo ${{ secrets.GHCR_TOKEN }} | sudo docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            cd dilpasand/
+            sudo git pull
+
+            # Check if the 'latest' image exists using docker image inspect
+            if sudo docker image inspect ghcr.io/husnain6666/dilpasand:latest > /dev/null 2>&1; then
+              echo "Tagging current 'latest' as 'previous'."
+              sudo docker tag ghcr.io/husnain6666/dilpasand:latest ghcr.io/husnain6666/dilpasand:previous
+            else
+              echo "No 'latest' image found to tag as 'previous'."
+            fi
+
+            sudo docker-compose pull
+            sudo docker-compose down
+            sudo docker-compose up -d --force-recreate
+
+            # Remove all dangling images
+            echo "Removing dangling images..."
+            sudo docker images --filter "dangling=true" --format '{{.Repository}}:{{.Tag}} {{.ID}}' | grep -vE 'latest|previous' | awk '{print $2}' | xargs -r sudo docker rmi
+
+          debug: true
