@@ -74,28 +74,36 @@ export default function GallerySection() {
     >
       {!showGallery && (
         <motion.div
-          className="bg-white p-4 absolute bottom-4 left-3 max-w-xs rounded-2xl"
+          className="bg-white p-4 absolute bottom-4 left-3 max-w-[250px]"
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={boxVariants}
         >
-          <div className="border-2 custom-border p-2 text-left">
-            <p className="text-custom-primary" style={{ fontSize: "1rem" }}>
-              It's 1949, and the thrill of the Talkies era is in full swing.
-              While cine stars chatter self-importantly, the wealthy hobnob with
-              the beautiful, the rakish and the occasional ne'er-do-wells. Stop
-              – admire our walls. The myriad of artefacts, photographs,
-              portraits, collectables. In their stillness they depict the
-              vivacity, life and glamour of 1930s and 40s Bombay.
-            </p>
-            <button
-              onClick={handleClick}
-              className="relative group border-none text-custom-secondary outline-none cursor-pointer p-1"
-              style={{ fontSize: "1rem" }}
-            >
-              View Gallery
-              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-custom-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-            </button>
+          <div className="border-2 custom-border p-1 text-left">
+            <div className="border border-black p-2">
+              <p
+                className="text-custom-primary"
+                style={{ fontSize: "0.85rem" }}
+              >
+                It's 1949, and the thrill of the Talkies era is in full swing.
+                While cine stars chatter self-importantly, the wealthy hobnob
+                with the beautiful, the rakish and the occasional
+                ne'er-do-wells. Stop – admire our walls. The myriad of
+                artefacts, photographs, portraits, collectables. In their
+                stillness they depict the vivacity, life and glamour of 1930s
+                and 40s Bombay.
+              </p>
+              <div className="flex justify-center items-baseline">
+                <button
+                  onClick={handleClick}
+                  className="relative group border-none text-custom-secondary outline-none cursor-pointer"
+                  style={{ fontSize: "1rem" }}
+                >
+                  View Gallery
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-custom-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                </button>
+              </div>
+            </div>
           </div>
         </motion.div>
       )}

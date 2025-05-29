@@ -86,9 +86,9 @@ export default function GalleryCards({ onClose }) {
       {/* Left Arrow */}
       <button
         onClick={movePrev}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white text-black p-2 shadow hover:bg-gray-200 transition z-10"
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white text-black p-2 shadow hover:bg-gray-200 transition z-10"
       >
-        <img src="./images/left_arrow.svg" alt="Previous" className="w-20" />
+        <img src="./images/left_arrow.svg" alt="Previous" className="w-16" />
       </button>
 
       {/* Gallery Images */}
@@ -110,9 +110,9 @@ export default function GalleryCards({ onClose }) {
       {/* Right Arrow */}
       <button
         onClick={moveNext}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white text-black p-2 shadow hover:bg-gray-200 transition z-10"
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white text-black p-2 shadow hover:bg-gray-200 transition z-10"
       >
-        <img src="./images/right_arrow.svg" alt="Next" className="w-20" />
+        <img src="./images/right_arrow.svg" alt="Next" className="w-16" />
       </button>
 
       {/* Close Button */}
