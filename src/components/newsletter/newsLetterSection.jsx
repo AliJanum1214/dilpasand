@@ -29,7 +29,7 @@ export default function NewsletterSection() {
   const isInView = useInView(formRef, { once: true, margin: "-100px" });
 
   return (
-    <div className="grid md:grid-cols-[70%_30%] min-h-screen bg-custom-primary">
+    <div className="grid md:grid-cols-[70%_30%] min-h-screen bg-custom-primary relative">
       {/* Left: Background Image with overlay text */}
       <div
         className="relative bg-cover bg-center min-h-screen w-full flex justify-center items-center"
@@ -40,7 +40,11 @@ export default function NewsletterSection() {
           “From Karachi with Love”
         </h1>
       </div>
-
+      {/* Divider */}
+      <div className="hidden md:block absolute left-[69.25%] top-0 h-full w-[1.5px] bg-[#aa340d] " />
+      <div className="hidden md:block absolute left-[69.5%] top-0 h-full w-[1.5px] bg-[#aa340d] " />
+      <div className=" hidden md:block absolute left-[69.75%] top-0 h-full w-[1.5px] bg-[#aa340d] " />
+      <div className=" hidden md:block absolute left-[69%] top-0 h-full w-[1.5px] bg-[#aa340d] " />
       {/* Right: Newsletter Form with Animation */}
       <motion.div
         ref={formRef}
