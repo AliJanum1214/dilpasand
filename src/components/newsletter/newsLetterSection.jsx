@@ -116,12 +116,12 @@ export default function NewsletterSection() {
               Newsletter
             </h2>
             <motion.h1
-              className="text-2xl md:text-3xl font-serif text-white font-medium leading-snug tracking-wider uppercase"
+              className="text-2xl mt-2 font-serif text-white font-medium leading-snug tracking-wider uppercase"
               initial={{ y: 20, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : {}}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
-              Subscribe to the Dishoom Newsletter
+              Subscribe to the Dilpasand Newsletter
             </motion.h1>
             <p
               style={{
