@@ -31,7 +31,7 @@ export default function NewsletterForm() {
 
         <div className="space-y-5 sm:space-y-6 md:space-y-7">
           {/* First Name */}
-          <div className="relative z-0 w-full mb-5 group">
+          {/* <div className="relative z-0 w-full mb-5 group">
             <input
               type="text"
               name="firstName"
@@ -48,10 +48,10 @@ export default function NewsletterForm() {
             >
               First Name
             </label>
-          </div>
+          </div> */}
 
           {/* Email Address */}
-          <div className="relative z-0 w-full mb-5 group">
+          {/* <div className="relative z-0 w-full mb-5 group">
             <input
               type="email"
               name="email"
@@ -68,10 +68,10 @@ export default function NewsletterForm() {
             >
               Email Address
             </label>
-          </div>
+          </div> */}
 
           {/* Postcode (Optional) */}
-          <div className="relative z-0 w-full mb-5 group">
+          {/* <div className="relative z-0 w-full mb-5 group">
             <input
               type="text"
               name="postcode"
@@ -87,10 +87,10 @@ export default function NewsletterForm() {
             >
               Postcode (Optional)
             </label>
-          </div>
+          </div> */}
 
           {/* Select Your Local Cafe */}
-          <div className="relative z-0 w-full mb-5 group">
+          {/* <div className="relative z-0 w-full mb-5 group">
             <select
               name="cafe"
               id="floating_cafe"
@@ -114,15 +114,57 @@ export default function NewsletterForm() {
             >
               Select Your Local Cafe
             </label>
-          </div>
+          </div> */}
 
           {/* Subscribe Button */}
-          <button
+          {/* <button
             onClick={handleSubscribe}
             className="w-full bg-custom-secondary text-white py-2.5 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-custom-secondary font-medium text-sm sm:text-base md:text-lg lg:text-lg xl:text-xl 2xl:text-xl transition-colors duration-300"
           >
             Subscribe
-          </button>
+          </button> */}
+          <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+            <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
+              <div className="mb-4">
+                <label className="block text-lg font-semibold text-gray-800 mb-2">
+                  FIRST NAMEs
+                </label>
+                <input
+                  type="text"
+                  placeholder="Kindly enter your name"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md text-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-lg font-semibold text-gray-800 mb-2">
+                  EMAIL ADDRESS
+                </label>
+                <input
+                  type="email"
+                  placeholder="Kindly enter your email address"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md text-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-lg font-semibold text-gray-800 mb-2">
+                  BIRTHDAY (OPTIONAL)
+                </label>
+                <input
+                  type="date"
+                  placeholder="For an annual surprise"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md text-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-lg font-semibold text-gray-800 mb-2">
+                  SELECT YOUR LOCAL CAFÉ
+                </label>
+                <select className="w-full px-4 py-2 border border-gray-300 rounded-md text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <option>...</option>
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
