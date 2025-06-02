@@ -118,7 +118,7 @@ export default function GalleryCards({ onClose }) {
       {/* Close Button */}
       <button
         onClick={onClose}
-        className="absolute bottom-10 right-4 bg-white text-black px-3 py-1 rounded-lg shadow hover:bg-gray-200 transition z-10"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-white text-black px-8 py-1 rounded-lg shadow hover:bg-gray-200 transition z-10"
       >
         Close
       </button>

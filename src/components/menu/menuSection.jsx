@@ -20,8 +20,8 @@ export default function MenuSection() {
       name: "Kashmiri Chai",
       description: (
         <>
-          A traditional pink tea with creamy nutty richness, made from Kashmiri
-          green tea, milk, cardamom, and served warm in winters.
+          A Karachi favorite—tender slow-cooked stew rich with bold flavours.
+          Served alongside flaky layered paratha.
         </>
       ),
       image: "./images/drinks.png",
@@ -31,8 +31,8 @@ export default function MenuSection() {
       name: "Mango Custard",
       description: (
         <>
-          A delightful dessert made with fresh mangoes, creamy custard, and a
-          hint of cardamom. Perfect for summer.
+          A Karachi favorite—tender slow-cooked stew rich with bold flavours.
+          Served alongside flaky layered paratha.
         </>
       ),
       image:
@@ -48,23 +48,19 @@ export default function MenuSection() {
       <img
         src="./images/heading_design.png"
         alt=""
-        className="absolute top-10 left-1/2 opacity-30 transform -translate-x-1/2 w-24 sm:w-32 md:w-40 lg:w-48 xl:w-56 2xl:w-64"
+        className="absolute top-16 left-1/2 opacity-30 transform -translate-x-1/2 w-44"
       />
       <div className="max-w-6xl mx-auto px-4 sm:px-0">
-        <div className="grid grid-cols-1 md:grid-cols-[40%_20%_40%]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {menuItems.map((item, index) => (
-            <div key={index}>
-              <MenuCard
-                category={item.category}
-                name={item.name}
-                image={item.image}
-                description={item.description}
-                isRightSide={index === 1}
-              />
-              <button className="my-4 ml-2 bg-custom-secondary text-white px-4 py-2 rounded-md hover:bg-opacity-75 transition">
-                View Menu
-              </button>
-            </div>
+            <MenuCard
+              key={index}
+              index={index}
+              category={item.category}
+              name={item.name}
+              description={item.description}
+              image={item.image}
+            />
           ))}
         </div>
       </div>

@@ -30,8 +30,6 @@ const CustomButton = styled(Button)(({ theme }) => ({
 export default function NewsletterSection() {
   const [formData, setFormData] = useState({
     email: "",
-    birthday: "",
-    postalCode: "",
     cafe: "",
     consent: false,
   });
@@ -121,7 +119,7 @@ export default function NewsletterSection() {
               animate={isInView ? { y: 0, opacity: 1 } : {}}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
-              Subscribe to the Dilpasand Newsletter
+              Subscribe to the Dilpasad Newsletter
             </motion.h1>
             <p
               style={{
@@ -175,97 +173,11 @@ export default function NewsletterSection() {
             />
           </motion.div>
 
-          {/* Birthday */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={isInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ delay: 0.5, duration: 0.6 }}
-          >
-            <TextField
-              label="Select date for annual surprise"
-              type="date"
-              name="birthday"
-              value={formData.birthday}
-              onChange={handleChange}
-              fullWidth
-              variant="outlined"
-              InputProps={{
-                style: { color: "white", fontSize: "14px" },
-                sx: {
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "rgba(255, 255, 255, 0.5)",
-                  },
-                  "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "rgba(255, 255, 255, 0.8)",
-                  },
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "white",
-                    borderWidth: "1px",
-                  },
-                  "& .MuiInputBase-input": {
-                    padding: "10px 12px",
-                    colorScheme: "dark", // dark mode for calendar
-                  },
-                  "& .MuiSvgIcon-root": {
-                    color: "white", // calendar icon color
-                  },
-                },
-              }}
-              InputLabelProps={{
-                shrink: true,
-                sx: {
-                  color: "white",
-                  "&.Mui-focused": { color: "white" },
-                },
-              }}
-            />
-          </motion.div>
-
-          {/* Postal Code */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={isInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ delay: 0.6, duration: 0.6 }}
-          >
-            <TextField
-              label="Postal Code"
-              name="postalCode"
-              value={formData.postalCode}
-              onChange={handleChange}
-              placeholder="e.g. 12345"
-              fullWidth
-              variant="outlined"
-              InputProps={{
-                style: { color: "white", fontSize: "14px" },
-                sx: {
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "rgba(255, 255, 255, 0.5)",
-                  },
-                  "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "rgba(255, 255, 255, 0.8)",
-                  },
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "white",
-                    borderWidth: "1px",
-                  },
-                  "& .MuiInputBase-input": { padding: "10px 12px" },
-                },
-              }}
-              InputLabelProps={{
-                style: { color: "white" },
-                sx: {
-                  "&.Mui-focused": { color: "white" },
-                },
-              }}
-            />
-          </motion.div>
-
-          {/* Cafe Selection */}
           {/* Cafe Selection */}
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ delay: 0.7, duration: 0.6 }}
+            transition={{ delay: 0.5, duration: 0.6 }} // Adjusted delay since fewer fields
           >
             <FormControl
               fullWidth
@@ -339,11 +251,12 @@ export default function NewsletterSection() {
               </Select>
             </FormControl>
           </motion.div>
+
           {/* Consent */}
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ delay: 0.8, duration: 0.6 }}
+            transition={{ delay: 0.6, duration: 0.6 }} // Adjusted delay
           >
             <FormControlLabel
               control={
