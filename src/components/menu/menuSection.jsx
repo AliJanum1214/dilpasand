@@ -45,11 +45,7 @@ export default function MenuSection() {
       <h2 className="text-custom-secondary text-4xl text-center font-heading uppercase mb-12">
         Chef's Special
       </h2>
-      <img
-        src="./images/heading_design.png"
-        alt=""
-        className="absolute top-16 left-1/2 opacity-30 transform -translate-x-1/2 w-44"
-      />
+
       <div className="max-w-6xl mx-auto px-4 sm:px-0">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {menuItems.map((item, index) => (

@@ -5,8 +5,7 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { href: "#story", name: "Our Story" },
-  { href: "#menu", name: "Menu" },
-  { href: "#experience", name: "Experience" },
+  { href: "/catering", name: "Catering" },
 ];
 
 export default function Navbar() {
@@ -50,6 +49,7 @@ export default function Navbar() {
           <h2 className="absolute left-1/2 transform -translate-x-1/2 text-xl sm:text-2xl font-semibold tracking-wider">
             Dilpasand
           </h2>
+          {/* <img src="./images/logo.png" alt="" className="w-20 h-auto" /> */}
           <div className="flex items-center">
             <button className="hidden md:inline-block bg-custom-secondary px-4 py-1 rounded-md text-sm lg:text-base transition custom-hover-bg-opacity">
               Book a Table

@@ -16,12 +16,12 @@ export default function Home() {
     <>
       <Navbar />
       <BannerVideo />
-      <AboutUsSection />
       <FindUs />
+      <AboutUsSection />
       <MenuSection />
       <MapInfoSection />
       <GallerySection />
-      <NewsLetterSection />
+      {/* <NewsLetterSection /> */}
       <Footer />
       {/* <BlogSection /> */}
     </>

@@ -70,7 +70,8 @@ export default function GallerySection() {
   return (
     <div
       ref={sectionRef}
-      className="relative gallery_section bg-cover bg-center bg-no-repeat h-screen w-full z-0"
+      className="relative gallery_section bg-cover bg-center bg-no-repeat h-[calc(100vh-100px)]
+ w-full z-0"
     >
       {!showGallery && (
         <motion.div

@@ -82,7 +82,7 @@ export default function GalleryCards({ onClose }) {
   };
 
   return (
-    <div className="relative flex gap-10 bg-custom-secondary p-4 h-screen pb-20 items-center overflow-hidden w-full">
+    <div className="relative flex gap-10 bg-custom-secondary p-4 h-[calc(100vh-100px)] pb-20 items-center overflow-hidden w-full">
       {/* Left Arrow */}
       <button
         onClick={movePrev}
@@ -118,7 +118,7 @@ export default function GalleryCards({ onClose }) {
       {/* Close Button */}
       <button
         onClick={onClose}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-white text-black px-8 py-1 rounded-lg shadow hover:bg-gray-200 transition z-10"
+        className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-white text-black px-8 py-1 rounded-lg shadow hover:bg-gray-200 transition z-10"
       >
         Close
       </button>
