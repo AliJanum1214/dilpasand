@@ -9,9 +9,9 @@ export default function MenuCard({
 }) {
   const getBorderRadius = () => {
     if (index === 0) {
-      return "rounded-tl-3xl rounded-bl-3xl";
+      return "rounded-tl-4xl rounded-bl-4xl";
     } else if (index === 2) {
-      return "rounded-tr-3xl rounded-br-3xl";
+      return "rounded-tr-4xl rounded-br-4xl";
     }
     return "";
   };
