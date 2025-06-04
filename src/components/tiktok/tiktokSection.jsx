@@ -40,7 +40,6 @@ const tiktokVideos = [
 const TikTokCard = ({ videoId, title, isFlipped }) => (
   <motion.div
     className="relative bg-custom-primary w-full overflow-hidden rounded-xl p-4 mt-3 mb-1 border-2 custom-border"
-    style={{ transform: isFlipped ? "scaleX(-1)" : "none" }}
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
@@ -147,12 +146,7 @@ export default function TikTokSection() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-6xl mx-auto">
           {tiktokVideos.map((video, index) => (
-            <TikTokCard
-              key={video.id}
-              videoId={video.id}
-              title={video.title}
-              isFlipped={(index + 1) % 3 === 0}
-            />
+            <TikTokCard key={video.id} videoId={video.id} title={video.title} />
           ))}
         </div>
       </div>
