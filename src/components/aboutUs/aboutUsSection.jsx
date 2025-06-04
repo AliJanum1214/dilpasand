@@ -1,12 +1,10 @@
 "use client";
-import { MoveRight, MousePointer2, Hand, Grab, Pointer } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import { MoveRight } from "lucide-react";
+import React, { useState } from "react";
 import "./about.style.css";
-import MenuBar from "../ui/menuBar";
 
 export default function AboutUsSection() {
   const [step, setStep] = useState(0);
-  const [showMenu, setShowMenu] = useState(false);
 
   const content = [
     {
@@ -36,35 +34,21 @@ export default function AboutUsSection() {
     },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const triggerPoint = window.innerHeight * 1.4;
-      if (window.scrollY >= triggerPoint) {
-        setShowMenu(true);
-      } else {
-        setShowMenu(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <div
-      id="story"
-      className="bg-custom-primary text-white relative overflow-hidden md:px-0 px-4 flex justify-center items-center"
+    <section
+      id="about-us"
+      className="pb-20 bg-custom-primary text-white relative overflow-hidden flex justify-center items-center"
     >
-      <div className="flex flex-col md:flex-row justify-between items-center gap-10 max-w-6xl mx-auto border custom-border p-8">
-        {/* Left */}
-        <div className="md:w-[40%] w-full flex items-center gap-4 ml-16">
-          <div className="flex flex-col items-center relative">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-6 max-w-6xl mx-auto border custom-border p-4 sm:p-6 md:p-8">
+        {/* Left: Timeline and Image */}
+        <div className="md:w-[40%] w-full flex items-center gap-4">
+          <div className="flex flex-col items-center relative w-full">
             {/* Timeline Container */}
-            <div className="relative h-96 flex flex-col justify-between items-center">
+            <div className="relative h-[50vh] md:h-[70vh] flex flex-col justify-between items-center">
               {content.map((item, index) => (
                 <div
                   key={index}
-                  className={`absolute flex items-center text-base transition-all duration-300 cursor-pointer ${
+                  className={`absolute flex items-center text-sm md:text-base transition-all duration-300 cursor-pointer ${
                     step === index
                       ? "text-custom-secondary font-semibold"
                       : "text-white opacity-70 hover:opacity-100"
@@ -80,7 +64,7 @@ export default function AboutUsSection() {
                 >
                   {step === index && (
                     <span
-                      className={`text-custom-secondary text-2xl ${
+                      className={`text-custom-secondary text-xl md:text-2xl ${
                         step === index ? "opacity-100" : "opacity-0"
                       }`}
                     >
@@ -97,52 +81,36 @@ export default function AboutUsSection() {
                 step="1"
                 value={step}
                 onChange={(e) => setStep(parseInt(e.target.value))}
-                className="h-96 w-[30px] cursor-pointer appearance-none bg-transparent rounded-full accent-custom-secondary relative z-10"
+                className="h-full w-[30px] cursor-pointer appearance-none bg-transparent rounded-full accent-custom-secondary relative z-10"
                 style={{ writingMode: "vertical-lr" }}
               />
               <div className="absolute h-full w-2 bg-white rounded-full" />
-              {/* {step === 0 && (
-                <span
-                  className="absolute top-0 right-0 translate-x-full text-yellow-500 text-2xl  cursor-pointer-icon animate-pulse"
-                  style={{ transform: "translate(100%, -50%)" }}
-                >
-                  <Pointer />
-                </span>
-              )} */}
             </div>
           </div>
           <img
             src="./images/author.png"
             alt="Founder"
-            className="w-40 h-80 object-cover rounded-lg shadow-lg ml-16"
+            className="w-32 md:w-40 h-64 md:h-80 object-cover rounded-lg shadow-lg hidden md:block"
           />
         </div>
 
-        {/* Right */}
+        {/* Right: Content */}
         <div className="md:w-[60%] w-full flex flex-col justify-center items-start gap-4 p-4">
-          <h5 className="text-2xl font-[400] text-custom-secondary">
+          <h5 className="text-xl md:text-2xl font-[400] text-custom-secondary">
             {content[step].heading}
           </h5>
-          <h3 className="text-yellow-500 text-4xl font-[500]">
+          <h3 className="text-yellow-500 text-3xl md:text-4xl font-[500]">
             {content[step].title}
           </h3>
-          <p className="text-white leading-relaxed">{content[step].text}</p>
+          <p className="text-sm md:text-base text-white leading-relaxed">
+            {content[step].text}
+          </p>
           <button className="relative group border-none text-custom-secondary outline-none cursor-pointer mt-2 p-1 capitalize flex gap-3 items-center">
-            Read more about the story{" "}
-            <span>
-              <MoveRight />
-            </span>
+            Read more about the story <MoveRight />
             <span className="absolute bottom-0 left-0 w-full h-[2px] bg-custom-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
           </button>
         </div>
       </div>
-
-      {/* Show only if scrolled beyond 140vh */}
-      {showMenu && (
-        <div className="fixed bottom-0 left-0 w-full z-50">
-          <MenuBar />
-        </div>
-      )}
-    </div>
+    </section>
   );
 }

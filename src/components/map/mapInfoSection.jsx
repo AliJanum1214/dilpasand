@@ -57,7 +57,7 @@ export default function MapInfoSection() {
   }, []);
 
   return (
-    <section className="bg-custom-primary py-20 px-4 sm:px-6 md:px-8 lg:px-0 relative">
+    <section className="section flex flex-col justify-center items-center bg-custom-primary relative">
       <h2 className="text-custom-secondary text-4xl text-center font-heading uppercase mb-12">
         Planning your visit
       </h2>
@@ -92,7 +92,7 @@ export default function MapInfoSection() {
             {infoSections.map((section, index) => (
               <div
                 key={index}
-                className="bg-[#333] shadow-2xl rounded-md p-4 text-center min-h-[150px] flex flex-col items-center"
+                className="bg-white/5 shadow-2xl rounded-md p-4 text-center min-h-[150px] flex flex-col items-center "
               >
                 <h3
                   className={`text-base sm:text-lg font-medium uppercase tracking-wide mb-2 ${
@@ -102,7 +102,7 @@ export default function MapInfoSection() {
                   {section.title}
                 </h3>
                 {section.content.map((line, i) => (
-                  <p key={i} className="text-xs sm:text-sm text-gray-200">
+                  <p key={i} className="text-xs sm:text-sm text-white">
                     {line}
                   </p>
                 ))}

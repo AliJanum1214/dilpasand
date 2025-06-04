@@ -1,5 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import Navbar from "@/components/ui/navbar";
+import Footer from "@/components/ui/footer";
 
 // Gill Sans for paragraphs
 const gillSans = localFont({
@@ -30,7 +32,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${gillSans.variable} ${futuraBold.variable} antialiased`}
       >
+        <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

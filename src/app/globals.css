@@ -22,7 +22,7 @@ h5,
 h6 {
   font-family: var(--font-heading);
   font-weight: 500;
-  letter-spacing: 1.3px;
+  letter-spacing: 1px;
 }
 button {
   font-family: var(--font-heading);
@@ -37,7 +37,7 @@ button {
 p {
   font-family: var(--font-paragraph);
   font-weight: 300;
-  word-spacing: 3px;
+  word-spacing: 2px;
   letter-spacing: normal;
   font-size: 20px;
 }
@@ -71,4 +71,15 @@ p {
 }
 .gallery_section {
   background-image: url("/images/gallery_banner.png");
+}
+.tiktok-embed section {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.tiktok-embed section > :not(a) {
+  display: none !important; /* hides the description text but keeps the link */
 }

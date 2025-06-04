@@ -52,7 +52,7 @@ export default function VideoBanner() {
   return (
     <div
       ref={sectionRef}
-      className="relative flex items-center justify-center h-screen w-screen bg-custom-primary overflow-hidden"
+      className="section relative flex items-center justify-center bg-custom-primary overflow-hidden"
     >
       <video
         ref={videoRef}
