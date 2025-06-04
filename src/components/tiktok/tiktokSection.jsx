@@ -134,10 +134,10 @@ export default function TikTokSection() {
   return (
     <div className="p-4 bg-custom-primary py-20" ref={containerRef}>
       <div className="max-w-6xl mx-auto flex flex-col items-center w-full">
-        <h2 className="text-3xl sm:text-4xl text-center font-bold uppercase mb-8 sm:mb-12 text-yellow-500">
+        <h2 className="text-3xl sm:text-4xl text-center font-bold uppercase mb-2 text-yellow-500">
           Follow us On
         </h2>
-        <div className="flex justify-center items-center mb-10">
+        <div className="flex justify-center items-center">
           <img
             src="/images/TikTok_logo.png"
             alt="TikTok Logo"
