@@ -36,7 +36,7 @@ export default function StorySection() {
   const dot4Opacity = useTransform(scrollYProgress, [0.6, 0.8, 1], [0, 1, 1]);
 
   return (
-    <section className="bg-[#1A0E08] text-white py-20 px-4 md:px-12 pt-36">
+    <section className="bg-[#1A0E08] text-white py-20 px-4 md:px-12 pt-28 md:pt-36">
       <div className="max-w-5.5xl mx-auto pb-20 relative">
         {/* Vertical Line with Dots */}
         <motion.div className="absolute left-4 top-0 h-full w-[1px] bg-custom-secondary">
@@ -98,7 +98,7 @@ export default function StorySection() {
             return (
               <motion.div
                 key={index}
-                className="pl-8 -mb-16 relative"
+                className="pl-8 mb-0 mt-4 md:mt-0 md:-mb-16 relative"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
@@ -120,8 +120,8 @@ export default function StorySection() {
 
                   {/* Text */}
                   <div
-                    className={`w-full md:w-[55%] border-b pb-10 custom-border ${
-                      !isEven ? "md:text-right" : ""
+                    className={`w-full md:w-[55%] border-b pb-10 custom-border  mt-5 ${
+                      !isEven ? "md:text-left pl-6" : "pl-6"
                     }`}
                   >
                     <h3 className="text-yellow-400 text-lg font-semibold mb-1">

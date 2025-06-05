@@ -57,7 +57,7 @@ export default function AboutUsSection() {
     >
       <div className="flex flex-col md:flex-row justify-between items-center gap-10 max-w-6xl mx-auto border custom-border p-8">
         {/* Left */}
-        <div className="md:w-[40%] w-full flex items-center gap-4 ml-16">
+        <div className="md:w-[40%] w-full flex items-center gap-4 ml-24 md:ml-16">
           <div className="flex flex-col items-center relative">
             {/* Timeline Container */}
             <div className="relative h-96 flex flex-col justify-between items-center">

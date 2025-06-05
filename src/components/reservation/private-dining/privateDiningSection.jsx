@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import ReservationForm from "./ReservationForm";
+import ReservationForm from "./reservationForm";
 
 const PrivateDiningSection = () => {
   return (

@@ -4,10 +4,10 @@ import MenuBar from "../ui/menuBar";
 
 export default function FindUs() {
   return (
-    <section className="py-20 bg-custom-primary relative justify-center items-center flex">
+    <section className="py-20 bg-custom-primary relative justify-center items-center flex md:px-0 px-4">
       <div className="">
         <div className="max-w-6xl mx-auto p-2 sm:p-4 md:p-6 border custom-border">
-          <div className="md:border-2 border-white p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 2xl:p-14 flex flex-col md:flex-row gap-6 sm:gap-8 md:gap-10 xl:gap-12">
+          <div className="border-2 border-white p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 2xl:p-14 flex flex-col md:flex-row gap-6 sm:gap-8 md:gap-10 xl:gap-12">
             {/* Text Section */}
             <div className="md:w-[60%] text-white">
               <h2 className="text-yellow-500 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[2.5rem] 2xl:text-5xl font-bold mb-4 sm:mb-6 md:mb-8 leading-tight">

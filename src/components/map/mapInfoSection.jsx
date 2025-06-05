@@ -24,9 +24,11 @@ export default function MapInfoSection() {
         </>
       ),
       content: [
-        "Aldgate East (District, Hammersmith & City lines)",
-        "Whitechapel (Elizabeth Line)",
-        "Liverpool Street (Central, Circle, National rail)",
+        <ul className="list-disc text-left ml-4 space-y-3">
+          <li>Aldgate East (District, Hammersmith & City lines)</li>
+          <li>Whitechapel (Elizabeth Line)</li>
+          <li>Liverpool Street (Central, Circle, National rail)</li>
+        </ul>,
       ],
     },
     {
@@ -84,7 +86,10 @@ export default function MapInfoSection() {
   }, []);
 
   return (
-    <section className="section flex flex-col justify-center  bg-custom-primary relative">
+    <section
+      className="section flex flex-col justify-center bg-custom-primary relative"
+      id="visit_us"
+    >
       <h2 className="text-custom-secondary text-4xl text-center font-heading uppercase mb-12">
         Planning your visit
       </h2>
@@ -138,9 +143,8 @@ export default function MapInfoSection() {
           </div>
           <div className="bg-custom-secondary rounded-md p-4 text-center text-white">
             <h2 className="text-3xl text-yellow-500">Group Bookings</h2>
-            <p>
-              call us for customised packages and hiring our private dining
-              space
+            <p style={{ fontSize: "18px" }}>
+              call us for customised packages & hiring our private dining space
             </p>
           </div>
         </div>

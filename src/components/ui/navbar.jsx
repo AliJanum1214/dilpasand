@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
-const navLinks = [{ href: "/#story", name: "Our Story" }];
+const navLinks = [{ href: "/our-story", name: "Our Story" }];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -42,15 +42,11 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          {/* Center: Logo */}
-          {/* <h2 className="absolute left-1/2 transform -translate-x-1/2 text-xl sm:text-2xl font-semibold tracking-wider">
-            Dilpasand
-          </h2> */}
           <Link href={"/"}>
             <img
-              src="./images/logo-3.png"
+              src="./images/logo.png"
               alt=""
-              className="absolute top-1 left-1/2 -translate-x-1/2 w-40 h-auto"
+              className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-auto"
             />
           </Link>
           <div className="flex items-center">

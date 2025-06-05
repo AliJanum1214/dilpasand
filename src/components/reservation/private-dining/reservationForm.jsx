@@ -13,7 +13,7 @@ import {
   DialogActions,
   Box,
   Typography,
-  FormHelperText,
+  Grid,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -31,7 +31,9 @@ export const DatePopup = ({ open, onClose, onDateSelect }) => {
           <DatePicker
             value={selectedDate}
             onChange={(newValue) => setSelectedDate(newValue)}
-            renderInput={(params) => <TextField {...params} fullWidth />}
+            renderInput={(params) => (
+              <TextField {...params} fullWidth sx={textFieldStyle} />
+            )}
           />
         </LocalizationProvider>
       </DialogContent>
@@ -69,8 +71,7 @@ const ReservationForm = () => {
   const countryCodes = ["+1", "+44", "+92", "+61", "+91"];
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-  const validatePhone = (phone) => /^[0-9]{7,15}$/.test(phone);
+  const validatePhone = (phone) => /^[0-9]{7,11}$/.test(phone);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -79,7 +80,6 @@ const ReservationForm = () => {
     if (name === "email") {
       setEmailError(validateEmail(value) ? "" : "Invalid email address");
     }
-
     if (name === "phone") {
       setPhoneError(validatePhone(value) ? "" : "Invalid phone number");
     }
@@ -97,7 +97,6 @@ const ReservationForm = () => {
       setEmailError("Invalid email address");
       return;
     }
-
     if (!validatePhone(formData.phone)) {
       setPhoneError("Invalid phone number");
       return;
@@ -139,7 +138,6 @@ const ReservationForm = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(emailData),
     });
-
     if (!response.ok) throw new Error("Email send failed");
     return response.json();
   };
@@ -174,10 +172,11 @@ const ReservationForm = () => {
       flexDirection="column"
       justifyContent="center"
       px={2}
-      maxWidth={500}
+      maxWidth={600}
       mx="auto"
       color="white"
     >
+      {/* Name */}
       <TextField
         label="Name"
         name="name"
@@ -189,21 +188,57 @@ const ReservationForm = () => {
         sx={textFieldStyle}
       />
 
+      {/* Email */}
       <TextField
-        label="Seats"
-        name="seats"
-        type="number"
-        inputProps={{ min: 1, max: 8 }}
-        value={formData.seats}
+        label="Email"
+        name="email"
+        type="email"
+        value={formData.email}
         onChange={handleChange}
         required
         fullWidth
         margin="normal"
+        error={!!emailError}
+        helperText={emailError}
         sx={textFieldStyle}
-        helperText="For bookings of more than 6 people, please call us and reserve your table"
-        FormHelperTextProps={{ sx: { color: "#aaa" } }}
       />
 
+      {/* Country Code + Phone */}
+      <Grid container spacing={2} alignItems="center" marginY={1}>
+        <Grid item xs={4}>
+          <FormControl fullWidth required>
+            <InputLabel sx={{ color: "#aaa" }}>Code</InputLabel>
+            <Select
+              name="countryCode"
+              value={formData.countryCode}
+              onChange={handleChange}
+              label="Code"
+              sx={selectStyle}
+            >
+              {countryCodes.map((code) => (
+                <MenuItem key={code} value={code}>
+                  {code}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={8}>
+          <TextField
+            label="Phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+            fullWidth
+            error={!!phoneError}
+            helperText={phoneError}
+            sx={textFieldStyle}
+          />
+        </Grid>
+      </Grid>
+
+      {/* Date */}
       <TextField
         label="Date"
         value={formData.date ? formData.date.format("YYYY-MM-DD") : ""}
@@ -220,6 +255,24 @@ const ReservationForm = () => {
         onDateSelect={handleDateSelect}
       />
 
+      {/* Seats */}
+      <TextField
+        label="Number of Persons"
+        name="seats"
+        type="number"
+        inputProps={{ min: 1, max: 8 }}
+        value={formData.seats}
+        onChange={handleChange}
+        required
+        fullWidth
+        margin="normal"
+        sx={textFieldStyle}
+        helperText="For bookings of more than 6 people, please call us."
+        FormHelperTextProps={{ sx: { color: "#aaa" } }}
+      />
+
+      {/* Time */}
+      {/* Time */}
       <FormControl fullWidth margin="normal" required>
         <InputLabel sx={{ color: "#aaa" }}>Time</InputLabel>
         <Select
@@ -230,70 +283,31 @@ const ReservationForm = () => {
           sx={selectStyle}
           MenuProps={{
             PaperProps: {
-              sx: { bgcolor: "#1e1e1e", color: "white", maxHeight: 300 },
+              sx: {
+                bgcolor: "white",
+                color: "black",
+                maxHeight: 300,
+              },
             },
+            anchorOrigin: {
+              vertical: "bottom",
+              horizontal: "left",
+            },
+            transformOrigin: {
+              vertical: "top",
+              horizontal: "left",
+            },
+            disablePortal: true,
           }}
         >
           {timeSlots.map((time) => (
-            <MenuItem
-              key={time}
-              value={time}
-              sx={{ bgcolor: "#1e1e1e", color: "white" }}
-            >
+            <MenuItem key={time} value={time}>
               {time}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-
-      <FormControl fullWidth margin="normal" required>
-        <InputLabel sx={{ color: "#aaa" }}>Country Code</InputLabel>
-        <Select
-          name="countryCode"
-          value={formData.countryCode}
-          onChange={handleChange}
-          label="Country Code"
-          sx={selectStyle}
-        >
-          {countryCodes.map((code) => (
-            <MenuItem
-              key={code}
-              value={code}
-              sx={{ bgcolor: "#1e1e1e", color: "white" }}
-            >
-              {code}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-
-      <TextField
-        label="Phone"
-        name="phone"
-        value={formData.phone}
-        onChange={handleChange}
-        required
-        fullWidth
-        margin="normal"
-        error={!!phoneError}
-        helperText={phoneError}
-        sx={textFieldStyle}
-      />
-
-      <TextField
-        label="Email"
-        name="email"
-        type="email"
-        value={formData.email}
-        onChange={handleChange}
-        required
-        fullWidth
-        margin="normal"
-        error={!!emailError}
-        helperText={emailError}
-        sx={textFieldStyle}
-      />
-
+      {/* Submit */}
       <Button
         type="submit"
         variant="contained"
@@ -302,9 +316,8 @@ const ReservationForm = () => {
           mt: 3,
           py: 1.5,
           fontSize: "1rem",
-          fontWeight: "bold",
-          bgcolor: "#1976d2",
-          "&:hover": { bgcolor: "#1565c0" },
+          fontWeight: "400",
+          bgcolor: "#aa340d",
         }}
         disabled={
           !formData.name ||
@@ -325,6 +338,9 @@ const ReservationForm = () => {
 // Reusable styles
 const textFieldStyle = {
   "& label": { color: "#aaa" },
+  "&.Mui-focused": {
+    color: "white",
+  },
   "& .MuiOutlinedInput-root": {
     color: "white",
     "& fieldset": { borderColor: "#444" },
@@ -335,6 +351,9 @@ const textFieldStyle = {
 
 const selectStyle = {
   color: "white",
+  "&.Mui-focused": {
+    color: "white",
+  },
   "& .MuiOutlinedInput-notchedOutline": { borderColor: "#444" },
   "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#666" },
   "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "white" },

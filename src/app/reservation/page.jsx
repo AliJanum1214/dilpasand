@@ -1,11 +1,11 @@
 import GroupBookingInfo from "@/components/reservation/private-dining/groupBookingInfo";
-import ReservationForm from "@/components/reservation/reservationForm";
+import ReservationForm from "@/components/reservation/private-dining/reservationForm";
 import Link from "next/link";
 import React from "react";
 
 export default function Reservation() {
   return (
-    <div className="px-4 sm:px-0 pb-20 pt-36 bg-custom-primary text-white">
+    <div className="px-4 sm:px-0  border-b border-white pt-36 bg-custom-primary text-white">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start gap-8">
           {/* Private Dining Section */}
@@ -18,11 +18,11 @@ export default function Reservation() {
                 PRIVATE DINING
               </h2>
             </div>
-            <p className="text-xs" style={{ fontSize: "0.9rem" }}>
+            <p className="text-xs" style={{ fontSize: "1rem" }}>
               We can accommodate over 70 people, and our expert team are on hand
               to seamlessly manage group bookings and large events.
             </p>
-            <p style={{ fontSize: "0.9rem" }}>
+            <p style={{ fontSize: "1rem" }}>
               If you’d like to host a private party at City Spice, please get in
               touch with our friendly manager. In order to make a private party
               booking please contact our manager through this email{" "}
@@ -34,9 +34,9 @@ export default function Reservation() {
               </Link>{" "}
               london.
             </p>
-            <p style={{ fontSize: "0.9rem" }}>
+            <p style={{ fontSize: "1rem" }}>
               Alternatively, you can ask for a private party using the booking
-              form above.
+              form below.
             </p>
             <div className="mt-6">
               <ReservationForm />
@@ -53,7 +53,7 @@ export default function Reservation() {
                 RESERVE BY PHONE
               </h2>
             </div>
-            <p style={{ fontSize: "0.9rem" }}>
+            <p style={{ fontSize: "1rem" }}>
               You can call us at the numbers below to make a booking and reserve
               your table via telephone.
             </p>

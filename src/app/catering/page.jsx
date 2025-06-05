@@ -1,9 +1,10 @@
+import DilpasandInfo from "@/components/dilpasand-info/dilpasandInfo";
 import { Mail, Phone } from "lucide-react";
 import React from "react";
 
 export default function Catering() {
   return (
-    <div className="bg-custom-primary pt-32">
+    <div className="bg-custom-primary pt-32 pb-20">
       <div className="max-w-6xl mx-auto text-white px-4">
         <h3 className="text-2xl md:text-4xl text-custom-secondary text-center mb-12">
           Organize your occasion With Dilpasand
@@ -35,38 +36,9 @@ export default function Catering() {
             Get in touch to build a custom menu and event plan that works for
             you.
           </h5>
-          <div className="flex items-start gap-3 mb-8">
-            <div className="flex gap-4">
-              <div>
-                <h2 className="text-lg text-yellow-500">Phone:</h2>
-                <a
-                  href="tel:+442072470285"
-                  className="flex items-center gap-1 text-white hover:underline"
-                >
-                  <Phone size={20} /> +44 20 7247 0285
-                </a>
-                <a
-                  href="tel:+447368657788"
-                  className="flex items-center gap-1 text-white hover:underline"
-                >
-                  <Phone size={20} /> +44 73 6865 7788
-                </a>
-              </div>
-              <div>
-                <h2 className="text-lg text-yellow-500">Email:</h2>
-                <a
-                  href="mailto:info@dilpasandrestaurant.com"
-                  className="flex items-center gap-1 text-white hover:underline"
-                >
-                  <Mail size={14} /> info@dilpasandrestaurant.com
-                </a>
-                <a
-                  href="mailto:catering@dilpasandrestaurant.com"
-                  className="flex items-center gap-1 text-white hover:underline"
-                >
-                  <Mail size={14} /> catering@dilpasandrestaurant.com
-                </a>
-              </div>
+          <div className="flex justify-center items-center mt-5">
+            <div className="bg-custom-secondary p-4 rounded-lg">
+              <DilpasandInfo />
             </div>
           </div>
         </div>

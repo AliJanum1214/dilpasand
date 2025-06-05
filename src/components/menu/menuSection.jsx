@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { menuItems } from "./menuCardsData";
+import ExploreMenu from "./exploreMenu";
 
 const MenuCard = ({
   category,
@@ -62,9 +63,6 @@ const MenuCard = ({
               className="object-cover w-full h-56 rounded-md"
             />
           </div>
-          <button className="w-full bg-custom-secondary text-white px-4 py-2 rounded-md hover:bg-opacity-75 transition">
-            View Menu
-          </button>
         </div>
       </div>
     </div>
@@ -132,7 +130,7 @@ const MenuSection = () => {
             <ChevronLeft size={36} />
           </button>
 
-          <div className="relative w-full h-full min-h-[550px] flex-1 overflow-hidden">
+          <div className="relative w-full h-full min-h-[570px] flex-1 overflow-hidden">
             <AnimatePresence custom={direction} initial={false} mode="wait">
               <motion.div
                 key={currentIndex}
@@ -176,6 +174,7 @@ const MenuSection = () => {
                 })}
               </motion.div>
             </AnimatePresence>
+            <ExploreMenu />
           </div>
           <button
             onClick={handleNext}
@@ -185,7 +184,7 @@ const MenuSection = () => {
             <ChevronRight size={36} />
           </button>
         </div>
-        <div className="flex justify-center gap-2 mt-8 cursor-pointer">
+        <div className="flex justify-center gap-2 cursor-pointer">
           {Array.from({
             length: Math.ceil(menuItems.length / itemsPerPage),
           }).map((_, i) => (

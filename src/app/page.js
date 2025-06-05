@@ -14,6 +14,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <>
+      {/* <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth"> */}
       <VideoBanner />
       <FindUs />
       <AboutUsSection />
@@ -21,6 +22,7 @@ export default function Home() {
       <MapInfoSection />
       <TikTokSection />
       <GallerySection />
+      {/* </div> */}
       {/* <NewsLetterSection /> */}
       {/* <BlogSection /> */}
     </>
