@@ -8,7 +8,7 @@ export const menuItems = [
         joints. Soft, spicy, and grilled to perfection.
       </>
     ),
-    image: "./images/nihari.png",
+    image: "./images/menu/gola_kabab.jpg",
   },
   {
     category: "Drinks",
@@ -19,7 +19,7 @@ export const menuItems = [
         smoky Behari masala and cooked on coals.
       </>
     ),
-    image: "./images/drinks.png",
+    image: "./images/menu/bihari_boti.jpg",
   },
   {
     category: "Desserts",
@@ -30,8 +30,7 @@ export const menuItems = [
         a crisp paratha—nostalgia in every bite.
       </>
     ),
-    image:
-      "https://img.freepik.com/premium-photo/plate-chocolate-cake-with-strawberry-strawberry_1122950-13065.jpg?ga=GA1.1.2028575557.1748437297&semt=ais_items_boosted&w=740",
+    image: "./images/menu/paratha_roll.jpg",
   },
   {
     category: "Custard",
@@ -42,7 +41,7 @@ export const menuItems = [
         Road straight to your plate.
       </>
     ),
-    image: "./images/nihari.png",
+    image: "./images/menu/haleem.jpg",
   },
   {
     category: "Sweets",
@@ -53,7 +52,7 @@ export const menuItems = [
         Biryani every Karachiite grew up with.
       </>
     ),
-    image: "./images/drinks.png",
+    image: "./images/menu/biryani.jpg",
   },
   {
     category: "Ice Cream",
@@ -64,7 +63,6 @@ export const menuItems = [
         hot at Karachi’s late-night chai spots.
       </>
     ),
-    image:
-      "https://img.freepik.com/premium-photo/plate-chocolate-cake-with-strawberry-strawberry_1122950-13065.jpg?ga=GA1.1.2028575557.1748437297&semt=ais_items_boosted&w=740",
+    image: "./images/menu/paratha.jpg",
   },
 ];

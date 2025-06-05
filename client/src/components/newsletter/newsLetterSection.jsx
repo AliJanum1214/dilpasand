@@ -74,7 +74,7 @@ export default function NewsletterSection() {
           animate={isInView ? { y: 0, opacity: 1 } : {}}
           transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
         >
-          "From Karachi with Love"
+          "Karachi Roots. London Tables"
         </motion.h1>
       </motion.div>
 

@@ -68,7 +68,7 @@ export default function VideoBanner() {
       />
       <div className="absolute inset-0 text-white flex items-center flex-col justify-center pointer-events-none">
         <h1 className="text-3xl md:text-6xl font-bold drop-shadow-lg">
-          “ From Karachi With Love ”
+          “Karachi Roots. London Tables ”
         </h1>
         <p className="py-3 max-w-sm text-center md:max-w-2xl">
           Experience the authentic taste of Karachi's Burns road in heart of
