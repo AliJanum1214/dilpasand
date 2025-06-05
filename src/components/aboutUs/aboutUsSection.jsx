@@ -3,6 +3,7 @@ import { MoveRight, MousePointer2, Hand, Grab, Pointer } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import "./about.style.css";
 import MenuBar from "../ui/menuBar";
+import Link from "next/link";
 
 export default function AboutUsSection() {
   const [step, setStep] = useState(0);
@@ -105,7 +106,7 @@ export default function AboutUsSection() {
           <img
             src={content[step].img}
             alt={content[step].title}
-            className="w-72 h-[400px] object-cover  shadow-lg ml-16 p-4 border custom-border"
+            className="w-72 h-[400px] object-cover  shadow-lg ml-16 p-4 border border-white"
           />
         </div>
 
@@ -118,13 +119,15 @@ export default function AboutUsSection() {
             {content[step].title}
           </h3>
           <p className="text-white leading-relaxed">{content[step].text}</p>
-          <button className="relative group border-none text-custom-secondary outline-none cursor-pointer mt-2 p-1 capitalize flex gap-3 items-center">
-            Read more about the story{" "}
-            <span>
-              <MoveRight />
-            </span>
-            <span className="absolute bottom-0 left-0 w-full h-[2px] bg-custom-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-          </button>
+          <Link href={"/our-story"}>
+            <button className="relative group border-none text-custom-secondary outline-none cursor-pointer mt-2 p-1 capitalize flex gap-3 items-center">
+              Read more about the story{" "}
+              <span>
+                <MoveRight />
+              </span>
+              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-custom-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+            </button>
+          </Link>
         </div>
       </div>
 

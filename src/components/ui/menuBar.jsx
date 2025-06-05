@@ -6,6 +6,7 @@ export default function MenuBar({ isFixed = true }) {
   const menuLinks = [
     { href: "#menu", name: "Menu" },
     { href: "/reservation", name: "Reservation" },
+    { href: "/catering", name: "Catering" },
     { href: "#visit_us", name: "Visit Us" },
   ];
 

@@ -5,7 +5,7 @@ import React from "react";
 export default function Reservation() {
   return (
     <>
-      <div className=" px-4 sm:px-0 pt-20 bg-custom-primary text-white">
+      <div className=" px-4 sm:px-0 py-20 bg-custom-primary text-white">
         <div className="flex justify-between items-start max-w-6xl mx-auto">
           <div className="w-full md:w-1/2 space-y-4">
             <div>
@@ -53,8 +53,8 @@ export default function Reservation() {
             </p>
           </div>
         </div>
+        <ReservationForm />
       </div>
-      <ReservationForm />
     </>
   );
 }

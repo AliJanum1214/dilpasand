@@ -1,5 +1,6 @@
 "use client";
-import { Clock, ClockPlus, MapPinHouse } from "lucide-react";
+import { Clock, ClockPlus, Mail, MapPinHouse, Phone } from "lucide-react";
+import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
 export default function MapInfoSection() {
@@ -14,7 +15,7 @@ export default function MapInfoSection() {
           <Clock /> Hours
         </>
       ),
-      content: ["Open daily – 11pm", "12 pm – 1 pm"],
+      content: ["Mid day to 11:30 pm"],
     },
     {
       title: (
@@ -24,17 +25,43 @@ export default function MapInfoSection() {
       ),
       content: [
         "Aldgate East (District, Hammersmith & City lines)",
-        "Whitechapel Overground Station",
-        "7 minutes",
+        "Whitechapel (Elizabeth Line)",
+        "Liverpool Street (Central, Circle, National rail)",
       ],
     },
     {
       title: "Flooring",
-      content: ["Ground floor access", "Wheelchair accessible"],
+      content: [
+        "Available for deliveries on Uber eats",
+        <>
+          <Link
+            href={
+              "https://www.ubereats.com/gb/store/dilpasand-whitechapel/fAOdlibgQ8q4taM3finjeg"
+            }
+            className="flex gap-2 items-center hover:underline"
+          >
+            <img src="./images/uber_eats_logo.png" alt="" className="w-7 h-7" />
+            Dilpasand (Whitechapel)
+          </Link>
+        </>,
+      ],
     },
     {
       title: "Contact",
-      content: ["Send us an email"],
+      content: [
+        <span key="phone1" className="flex items-center gap-1 text-white">
+          <Phone size={20} /> +44 20 7247 0285
+        </span>,
+        <span key="phone2" className="flex items-center gap-1 text-white">
+          <Phone size={20} /> +44 73 6865 7788
+        </span>,
+        // <span key="email1" className="flex items-center gap-1 text-white">
+        //   <Mail size={14} /> info@dilpasandrestaurant.com
+        // </span>,
+        // <span key="email2" className="flex items-center gap-1 text-white">
+        //   <Mail size={14} /> catering@dilpasandrestaurant.com
+        // </span>,
+      ],
     },
   ];
 
@@ -57,7 +84,7 @@ export default function MapInfoSection() {
   }, []);
 
   return (
-    <section className="section flex flex-col justify-center items-center bg-custom-primary relative">
+    <section className="section flex flex-col justify-center  bg-custom-primary relative">
       <h2 className="text-custom-secondary text-4xl text-center font-heading uppercase mb-12">
         Planning your visit
       </h2>
@@ -111,7 +138,10 @@ export default function MapInfoSection() {
           </div>
           <div className="bg-custom-secondary rounded-md p-4 text-center text-white">
             <h2 className="text-3xl text-yellow-500">Group Bookings</h2>
-            <p>Get in touch for more large group bookings</p>
+            <p>
+              call us for customised packages and hiring our private dining
+              space
+            </p>
           </div>
         </div>
       </div>
