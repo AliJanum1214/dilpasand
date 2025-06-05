@@ -1,3 +1,5 @@
-export default function MenuTagline() {
-  return <></>;
+import React from "react";
+
+export default function menuTagLine() {
+  return <div>menuTagLine</div>;
 }
