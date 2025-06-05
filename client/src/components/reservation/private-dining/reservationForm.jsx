@@ -17,7 +17,9 @@ import {
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { v4 as uuidv4 } from "uuid";
 import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
 export const DatePopup = ({ open, onClose, onDateSelect }) => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
@@ -101,44 +103,51 @@ const ReservationForm = () => {
       return;
     }
 
-    try {
-      await sendEmail({
-        to: "shampi.goli@gmail.com",
-        subject: "New Reservation",
-        text: `New reservation from ${formData.name} (${
-          formData.email
-        })\nPhone: ${formData.countryCode} ${
-          formData.phone
-        }\nDate: ${formData.date.format("YYYY-MM-DD")}\nTime: ${
-          formData.time
-        }\nSeats: ${formData.seats}`,
-      });
+    dayjs.extend(customParseFormat);
 
-      await sendEmail({
-        to: formData.email,
-        subject: "Reservation Confirmation",
-        text: `Thank you for your reservation, ${
-          formData.name
-        }!\nDetails:\nDate: ${formData.date.format("YYYY-MM-DD")}\nTime: ${
-          formData.time
-        }\nSeats: ${formData.seats}`,
-      });
+    try {
+      const formattedTime = dayjs(formData.time, "h:mm A").format("HH:mm:ss");
+      const formattedDateTime = formData.date
+        ? `${formData.date.format("YYYY-MM-DD")} ${formattedTime}`
+        : null;
+
+      const bodyData = {
+        id: uuidv4(), // Generate a new UUID
+        type: "reservation",
+        opt_out: 1,
+        referral_source: "Google Search",
+        name: formData.name,
+        email: formData.email,
+        phone: `${formData.countryCode}${formData.phone}`,
+        // date: formData.date ? formData.date.format("YYYY-MM-DD") : null, // Include date
+        seats: formData.seats,
+        reservation_time: formattedDateTime, // Format: YYYY-MM-DD HH:mm:ss
+      };
+
+      console.log("Request body:", bodyData); // Log the payload before sending
+
+      const response = await fetch(
+        "https://dilpasandrestaurant.com/back/entries/insert",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(bodyData), // Stringify the body
+        }
+      );
+
+      console.log("Response status:", response.status); // Log response status
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({})); // Try to parse error response
+        console.error("Response error:", errorData); // Log server error details
+        throw new Error(`Failed to submit reservation: ${response.statusText}`);
+      }
 
       setSubmitted(true);
     } catch (error) {
-      console.error("Email error:", error);
+      console.error("Submission error:", error.message); // Log the error
       alert("Error submitting reservation. Please try again.");
     }
-  };
-
-  const sendEmail = async (emailData) => {
-    const response = await fetch("/api/send-email", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(emailData),
-    });
-    if (!response.ok) throw new Error("Email send failed");
-    return response.json();
   };
 
   if (submitted) {
@@ -363,7 +372,7 @@ const selectStyle = {
     padding: "0 24px 0 14px",
     boxSizing: "border-box",
     lineHeight: "50px",
-    textAlign: "center", // Center the selected text in dropdown
+    textAlign: "center",
   },
   "& .MuiOutlinedInput-notchedOutline": { borderColor: "#444" },
   "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#666" },
