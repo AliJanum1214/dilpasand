@@ -14,14 +14,12 @@ export default function FindUs() {
                 WELCOME TO DILPASAND
               </h2>
               <p className="text-sm md:text-xl mb-4 tracking-normal word-spacing-tight leading-[33px] ">
-                Homemade recipes from Karachi enrich the soul in this welcoming
-                dining room inspired by a Pakistani grandmother; “All-embracing
-                timeless comfort.” Ornate tapestries and twinkling lights infuse
-                the spirit of family feasts.
-              </p>
-              <p className="text-sm md:text-base">
-                A 10-minute walk to Tower Bridge, Dilpasand is open every day,
-                serving food from morning to night. All are welcome.
+                Dilpasand is bringing the soulful flavours of Karachi to the
+                streets of London. The menu pays homage to the city’s iconic
+                food spots, Burns Road, Tariq Road, Do Darya and most
+                importantly, the Nani jaan’s of everyone back home, serving
+                dishes that are rich in flavour and rooted in Pakistani
+                tradition.
               </p>
             </div>
 

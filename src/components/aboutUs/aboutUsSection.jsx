@@ -105,7 +105,7 @@ export default function AboutUsSection() {
           <img
             src={content[step].img}
             alt={content[step].title}
-            className="w-72 h-[400px] object-cover  shadow-lg ml-16"
+            className="w-72 h-[400px] object-cover  shadow-lg ml-16 p-4 border custom-border"
           />
         </div>
 

@@ -109,14 +109,10 @@ export default function TikTokSection() {
   };
 
   useEffect(() => {
-    // Attempt to parse immediately in case script is cached
     parseTikTokEmbeds();
     loadTikTokScript();
-
-    // Set up MutationObserver for dynamic updates
     const observer = new MutationObserver(() => {
       parseTikTokEmbeds();
-      // Fallback retry after a short delay
       setTimeout(parseTikTokEmbeds, 100);
     });
 
@@ -126,8 +122,6 @@ export default function TikTokSection() {
         subtree: true,
       });
     }
-
-    // Cleanup
     return () => observer.disconnect();
   }, []);
 

@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { menuItems } from "./menuCardsData";
-import MenuTagline from "./menuTagLine";
 
 const MenuCard = ({
   category,
@@ -204,7 +203,6 @@ const MenuSection = () => {
             />
           ))}
         </div>
-        <MenuTagline />
       </div>
     </div>
   );
