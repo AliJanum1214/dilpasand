@@ -12,7 +12,7 @@ export default function AboutUsSection() {
     {
       heading: "2002",
       title: "The Humble Beginning",
-      text: `Asghar Khan arrived in London from Karachi, bringing with him a deep connection to the food culture he grew up with.`,
+      text: "Asghar Khan arrived in London from Karachi, bringing with him a deep connection to the food culture he grew up with.",
       img: "./images/author.png",
     },
     {
