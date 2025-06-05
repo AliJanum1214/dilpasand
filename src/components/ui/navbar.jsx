@@ -21,7 +21,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 bg-custom-primary text-white transition-shadow duration-300 ${
+      className={`fixed top-0 w-full z-50 h-[70px] bg-custom-primary text-white transition-shadow duration-300 ${
         isScrolled ? "shadow-xl" : "shadow-none"
       }`}
     >
@@ -47,7 +47,11 @@ export default function Navbar() {
             Dilpasand
           </h2> */}
           <Link href={"/"}>
-            <img src="./images/logo-2.png" alt="" className="w-28 h-auto" />
+            <img
+              src="./images/logo-3.png"
+              alt=""
+              className="absolute top-1 left-1/2 -translate-x-1/2 w-40 h-auto"
+            />
           </Link>
           <div className="flex items-center">
             <button className="hidden md:inline-block bg-custom-secondary px-4 py-1 rounded-md text-sm lg:text-base transition custom-hover-bg-opacity">
