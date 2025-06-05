@@ -13,7 +13,6 @@ import {
   DialogActions,
   Box,
   Typography,
-  Grid,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -149,7 +148,6 @@ const ReservationForm = () => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        minHeight="100vh"
         px={2}
         color="white"
       >
@@ -167,88 +165,123 @@ const ReservationForm = () => {
     <Box
       component="form"
       onSubmit={handleSubmit}
-      minHeight="100vh"
       display="flex"
       flexDirection="column"
       justifyContent="center"
-      px={2}
+      p={2}
       maxWidth={600}
       mx="auto"
+      bgcolor="#120901"
       color="white"
+      borderRadius="10px"
+      gap={0}
     >
-      {/* Name */}
-      <TextField
-        label="Name"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        required
-        fullWidth
-        margin="normal"
-        sx={textFieldStyle}
-      />
+      {/* Name and Email in one row */}
+      <Box display="flex" gap={2} alignItems="center">
+        <TextField
+          label="Name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+          fullWidth
+          margin="normal"
+          sx={{ ...textFieldStyle, flex: 1 }}
+        />
+        <TextField
+          label="Email"
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          fullWidth
+          margin="normal"
+          error={!!emailError}
+          helperText={emailError}
+          sx={{ ...textFieldStyle, flex: 1 }}
+        />
+      </Box>
 
-      {/* Email */}
-      <TextField
-        label="Email"
-        name="email"
-        type="email"
-        value={formData.email}
-        onChange={handleChange}
-        required
-        fullWidth
-        margin="normal"
-        error={!!emailError}
-        helperText={emailError}
-        sx={textFieldStyle}
-      />
-
-      {/* Country Code + Phone */}
-      <Grid container spacing={2} alignItems="center" marginY={1}>
-        <Grid item xs={4}>
-          <FormControl fullWidth required>
-            <InputLabel sx={{ color: "#aaa" }}>Code</InputLabel>
-            <Select
-              name="countryCode"
-              value={formData.countryCode}
-              onChange={handleChange}
-              label="Code"
-              sx={selectStyle}
-            >
-              {countryCodes.map((code) => (
-                <MenuItem key={code} value={code}>
-                  {code}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={8}>
-          <TextField
-            label="Phone"
-            name="phone"
-            value={formData.phone}
+      {/* Country Code + Phone in a single row */}
+      <Box display="flex" gap={2} alignItems="center">
+        <FormControl fullWidth sx={{ flex: 1 }}>
+          <InputLabel sx={{ color: "#aaa" }}>Code</InputLabel>
+          <Select
+            name="countryCode"
+            value={formData.countryCode}
             onChange={handleChange}
-            required
-            fullWidth
-            error={!!phoneError}
-            helperText={phoneError}
-            sx={textFieldStyle}
-          />
-        </Grid>
-      </Grid>
+            label="Code"
+            sx={selectStyle}
+          >
+            {countryCodes.map((code) => (
+              <MenuItem key={code} value={code}>
+                {code}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <TextField
+          label="Phone"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          required
+          fullWidth
+          margin="normal"
+          error={!!phoneError}
+          helperText={phoneError}
+          sx={{ ...textFieldStyle, flex: 2, mb: "5px" }}
+        />
+      </Box>
 
-      {/* Date */}
-      <TextField
-        label="Date"
-        value={formData.date ? formData.date.format("YYYY-MM-DD") : ""}
-        onClick={() => setDatePopupOpen(true)}
-        InputProps={{ readOnly: true }}
-        required
-        fullWidth
-        margin="normal"
-        sx={textFieldStyle}
-      />
+      {/* Date and Time in one row */}
+      <Box display="flex" gap={2} alignItems="center">
+        <TextField
+          label="Date"
+          value={formData.date ? formData.date.format("YYYY-MM-DD") : ""}
+          onClick={() => setDatePopupOpen(true)}
+          InputProps={{ readOnly: true }}
+          required
+          fullWidth
+          margin="normal"
+          sx={{ ...textFieldStyle, flex: 1 }}
+        />
+        <FormControl fullWidth margin="normal" required sx={{ flex: 1 }}>
+          <InputLabel sx={{ color: "#aaa" }}>Time</InputLabel>
+          <Select
+            name="time"
+            value={formData.time}
+            onChange={handleChange}
+            label="Time"
+            sx={selectStyle}
+            MenuProps={{
+              PaperProps: {
+                sx: {
+                  bgcolor: "white",
+                  color: "black",
+                  maxHeight: 300,
+                },
+              },
+              anchorOrigin: {
+                vertical: "bottom",
+                horizontal: "left",
+              },
+              transformOrigin: {
+                vertical: "top",
+                horizontal: "left",
+              },
+              disablePortal: true,
+            }}
+          >
+            {timeSlots.map((time) => (
+              <MenuItem key={time} value={time}>
+                {time}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
       <DatePopup
         open={datePopupOpen}
         onClose={() => setDatePopupOpen(false)}
@@ -271,46 +304,9 @@ const ReservationForm = () => {
         FormHelperTextProps={{ sx: { color: "#aaa" } }}
       />
 
-      {/* Time */}
-      {/* Time */}
-      <FormControl fullWidth margin="normal" required>
-        <InputLabel sx={{ color: "#aaa" }}>Time</InputLabel>
-        <Select
-          name="time"
-          value={formData.time}
-          onChange={handleChange}
-          label="Time"
-          sx={selectStyle}
-          MenuProps={{
-            PaperProps: {
-              sx: {
-                bgcolor: "white",
-                color: "black",
-                maxHeight: 300,
-              },
-            },
-            anchorOrigin: {
-              vertical: "bottom",
-              horizontal: "left",
-            },
-            transformOrigin: {
-              vertical: "top",
-              horizontal: "left",
-            },
-            disablePortal: true,
-          }}
-        >
-          {timeSlots.map((time) => (
-            <MenuItem key={time} value={time}>
-              {time}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
       {/* Submit */}
       <Button
         type="submit"
-        variant="contained"
         fullWidth
         sx={{
           mt: 3,
@@ -318,15 +314,14 @@ const ReservationForm = () => {
           fontSize: "1rem",
           fontWeight: "400",
           bgcolor: "#aa340d",
+          color: "white",
         }}
         disabled={
           !formData.name ||
           !formData.email ||
           !formData.phone ||
           !formData.date ||
-          !formData.time ||
-          !!emailError ||
-          !!phoneError
+          !formData.time
         }
       >
         Submit Reservation
@@ -337,12 +332,19 @@ const ReservationForm = () => {
 
 // Reusable styles
 const textFieldStyle = {
+  width: "100%",
   "& label": { color: "#aaa" },
   "&.Mui-focused": {
     color: "white",
   },
   "& .MuiOutlinedInput-root": {
     color: "white",
+    "& input": {
+      fontSize: "16px",
+      height: "50px",
+      padding: "0 14px",
+      boxSizing: "border-box",
+    },
     "& fieldset": { borderColor: "#444" },
     "&:hover fieldset": { borderColor: "#666" },
     "&.Mui-focused fieldset": { borderColor: "white" },
@@ -351,8 +353,17 @@ const textFieldStyle = {
 
 const selectStyle = {
   color: "white",
+  height: "50px",
   "&.Mui-focused": {
     color: "white",
+  },
+  "& .MuiSelect-select": {
+    fontSize: "16px",
+    height: "50px",
+    padding: "0 24px 0 14px",
+    boxSizing: "border-box",
+    lineHeight: "50px",
+    textAlign: "center", // Center the selected text in dropdown
   },
   "& .MuiOutlinedInput-notchedOutline": { borderColor: "#444" },
   "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#666" },
