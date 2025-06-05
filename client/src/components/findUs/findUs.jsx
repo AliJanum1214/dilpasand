@@ -21,15 +21,21 @@ export default function FindUs() {
                 dishes that are rich in flavour and rooted in Pakistani
                 tradition.
               </p>
+              <p className="text-sm md:text-xl mb-4 tracking-normal word-spacing-tight leading-[33px] ">
+                Experience authentic Karachi street food at Dilpasand, where
+                every bite captures the vibrant essence of Pakistan’s culinary
+                heritage, crafted with love and tradition in the heart of
+                London.
+              </p>
             </div>
 
             {/* Image Section */}
             <div className="md:w-[30%] flex md:justify-start justify-center items-center">
               <div className="">
                 <img
-                  src="./images/find_us.png"
+                  src="./images/find_us.jpeg"
                   alt="Dilpasand restaurant interior"
-                  className="w-full md:w-[250px]  h-[300px]  object-contain border shadow-2xl custom-border p-2"
+                  className="w-full md:w-full  h-[400px]  object-cover border shadow-2xl custom-border p-2"
                 />
               </div>
             </div>

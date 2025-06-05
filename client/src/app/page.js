@@ -21,7 +21,7 @@ export default function Home() {
       <MenuSection />
       <MapInfoSection />
       <TikTokSection />
-      <GallerySection />
+      {/* <GallerySection /> */}
       {/* </div> */}
       {/* <NewsLetterSection /> */}
       {/* <BlogSection /> */}

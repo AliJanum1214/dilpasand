@@ -2,12 +2,14 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import ReservationModal from "../modal/reservationModal";
 
 const navLinks = [{ href: "/our-story", name: "Our Story" }];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -44,13 +46,16 @@ export default function Navbar() {
           </ul>
           <Link href={"/"}>
             <img
-              src="./images/logo.png"
+              src="/images/logo.png"
               alt=""
               className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-auto"
             />
           </Link>
           <div className="flex items-center">
-            <button className="hidden md:inline-block bg-custom-secondary px-4 py-1 rounded-md text-sm lg:text-base transition custom-hover-bg-opacity">
+            <button
+              className="hidden md:inline-block bg-custom-secondary px-4 py-1 rounded-md text-sm lg:text-base transition custom-hover-bg-opacity"
+              onClick={() => setIsModalOpen(true)}
+            >
               Book a Table
             </button>
             <button
@@ -87,13 +92,16 @@ export default function Navbar() {
             </ul>
             <button
               className="mt-8 bg-custom-secondary px-4 py-2 rounded-md text-base hover:bg-opacity-90 transition custom-hover-bg-opacity"
-              onClick={toggleMenu}
+              onClick={() => setIsModalOpen(true)}
             >
               Book a Table
             </button>
           </div>
         </div>
       </div>
+      {isModalOpen && (
+        <ReservationModal onClose={() => setIsModalOpen(false)} />
+      )}
     </nav>
   );
 }

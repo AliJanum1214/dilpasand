@@ -177,7 +177,7 @@ const ReservationForm = () => {
       display="flex"
       flexDirection="column"
       justifyContent="center"
-      p={2}
+      p={3}
       maxWidth={600}
       mx="auto"
       bgcolor="#120901"

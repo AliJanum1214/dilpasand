@@ -4,17 +4,16 @@ import { X } from "lucide-react";
 
 export default function ReservationModal({ onClose }) {
   return (
-    <div className="fixed inset-0 z-50 bg-custom-primary bg-opacity-70">
-      <div className="relative min-h-screen flex justify-center pt-[100px] pb-[50px]">
-        <div className=" p-6 rounded-md max-w-lg w-full">
-          <button
-            onClick={onClose}
-            className="absolute top-20 right-8 text-white text-xl font-bold"
-          >
-            <X />
-          </button>
-          <ReservationForm />
-        </div>
+    <div className="fixed inset-0 z-50 bg-white/5 backdrop-blur-sm flex justify-center items-center">
+      <div className="relative w-full max-w-md top-[70px]">
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-1 right-2 text-white hover:text-gray-300 transition"
+        >
+          <X size={24} />
+        </button>
+        <ReservationForm />
       </div>
     </div>
   );
