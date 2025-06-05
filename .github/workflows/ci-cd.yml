@@ -4,43 +4,124 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "client/**"
+      - "server/**"
+      - "nginx/**"
+      - "docker-compose.yml"
 
 jobs:
-  build-and-push:
+  client-build-and-deploy:
     runs-on: ubuntu-latest
+    outputs:
+      client-changed: ${{ steps.check-changes.outputs.has_changes }}
     steps:
       - name: Check out code
         uses: actions/checkout@v3
-
+        with:
+          fetch-depth: 0
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
-
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-
-      - name: Build
-        run: npm run build
-
-      - name: Log in to GitHub Container Registry
+      - name: Check for client changes
+        id: check-changes
+        run: |
+          echo "::set-output name=has_changes::$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep 'client/' &> /dev/null && echo 'true' || echo 'false')"
+      - name: Install dependencies and Build client
+        if: steps.check-changes.outputs.has_changes == 'true'
+        run: |
+          cd client
+          npm install --legacy-peer-deps
+          npm run build
+      - name: Docker Login
+        if: steps.check-changes.outputs.has_changes == 'true'
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_TOKEN }}
-
-      - name: Build and push Docker image
+      - name: Build and push Docker image for client
+        if: steps.check-changes.outputs.has_changes == 'true'
         uses: docker/build-push-action@v4
         with:
-          context: .
-          file: ./Dockerfile
+          context: ./client
+          file: ./client/Dockerfile
           push: true
-          tags: ghcr.io/husnain6666/dilpasand:latest
+          tags: ghcr.io/husnain6666/dilpasand-client:latest
+
+  server-build-and-deploy:
+    runs-on: ubuntu-latest
+    outputs:
+      server-changed: ${{ steps.check-changes.outputs.has_changes }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+      - name: Check for server changes
+        id: check-changes
+        run: |
+          echo "::set-output name=has_changes::$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep 'server/' &> /dev/null && echo 'true' || echo 'false')"
+      - name: Install dependencies and Build server
+        if: steps.check-changes.outputs.has_changes == 'true'
+        run: |
+          cd server
+          npm install --legacy-peer-deps
+      - name: Docker Login
+        if: steps.check-changes.outputs.has_changes == 'true'
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_TOKEN }}
+      - name: Build and push Docker image for server
+        if: steps.check-changes.outputs.has_changes == 'true'
+        uses: docker/build-push-action@v4
+        with:
+          context: ./server
+          file: ./server/Dockerfile
+          push: true
+          tags: ghcr.io/husnain6666/dilpasand-server:latest
+
+  nginx-build-and-deploy:
+    runs-on: ubuntu-latest
+    outputs:
+      nginx-changed: ${{ steps.check-changes.outputs.has_changes }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Check for nginx changes
+        id: check-changes
+        run: |
+          echo "::set-output name=has_changes::$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep 'nginx/' &> /dev/null && echo 'true' || echo 'false')"
+      - name: Docker Login
+        if: steps.check-changes.outputs.has_changes == 'true'
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_TOKEN }}
+      - name: Build and push Docker image for nginx
+        if: steps.check-changes.outputs.has_changes == 'true'
+        uses: docker/build-push-action@v4
+        with:
+          context: ./nginx
+          file: ./nginx/Dockerfile
+          push: true
+          tags: ghcr.io/husnain6666/dilpasand-nginx:latest
 
   deploy:
-    needs: build-and-push
+    needs:
+      [client-build-and-deploy, server-build-and-deploy, nginx-build-and-deploy]
     runs-on: ubuntu-latest
+    if: needs.client-build-and-deploy.outputs.client-changed == 'true' || needs.server-build-and-deploy.outputs.server-changed == 'true' || needs.nginx-build-and-deploy.outputs.nginx-changed == 'true'
     steps:
       - name: Deploy to VM
         uses: appleboy/ssh-action@master
@@ -49,24 +130,60 @@ jobs:
           username: ${{ secrets.VM_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            echo "Deploying to VM..."
             echo ${{ secrets.GHCR_TOKEN }} | sudo docker login ghcr.io -u ${{ github.actor }} --password-stdin
             cd dilpasand/
             sudo git pull
+            if [ "${{ needs.client-build-and-deploy.outputs.client-changed }}" == "true" ]; then
 
-            # Check if the 'latest' image exists using docker image inspect
-            if sudo docker image inspect ghcr.io/husnain6666/dilpasand:latest > /dev/null 2>&1; then
-              echo "Tagging current 'latest' as 'previous'."
-              sudo docker tag ghcr.io/husnain6666/dilpasand:latest ghcr.io/husnain6666/dilpasand:previous
-            else
-              echo "No 'latest' image found to tag as 'previous'."
+              # Check if the 'latest' image exists using docker image inspect
+              if sudo docker image inspect ghcr.io/husnain6666/dilpasand-client:latest > /dev/null 2>&1; then
+                echo "Tagging current 'latest' as 'previous' in client."
+                sudo docker tag ghcr.io/husnain6666/dilpasand-client:latest ghcr.io/husnain6666/dilpasand-client:previous
+              else
+                echo "No 'latest' image found to tag as 'previous' in client."
+              fi
+
+              echo "Deploying client..."
+              sudo docker-compose pull client
+              sudo docker-compose stop client
+              sudo docker-compose rm -f client
+              sudo docker-compose up -d --force-recreate client
             fi
+            if [ "${{ needs.server-build-and-deploy.outputs.server-changed }}" == "true" ]; then
 
-            sudo docker-compose pull
-            sudo docker-compose down
-            sudo docker-compose up -d --force-recreate
+              # Check if the 'latest' image exists using docker image inspect
+              if sudo docker image inspect ghcr.io/husnain6666/dilpasand-server:latest > /dev/null 2>&1; then
+                echo "Tagging current 'latest' as 'previous' in server."
+                sudo docker tag ghcr.io/husnain6666/dilpasand-server:latest ghcr.io/husnain6666/dilpasand-server:previous
+              else
+                echo "No 'latest' image found to tag as 'previous' in server."
+              fi
+
+              echo "Deploying server..."
+              sudo docker-compose pull server
+              sudo docker-compose stop server
+              sudo docker-compose rm -f server
+              sudo docker-compose up -d --force-recreate server
+            fi
+            if [ "${{ needs.nginx-build-and-deploy.outputs.nginx-changed }}" == "true" ]; then
+
+              # Check if the 'latest' image exists using docker image inspect
+              if sudo docker image inspect ghcr.io/husnain6666/dilpasand-nginx:latest > /dev/null 2>&1; then
+                echo "Tagging current 'latest' as 'previous' in nginx."
+                sudo docker tag ghcr.io/husnain6666/dilpasand-nginx:latest ghcr.io/husnain6666/dilpasand-nginx:previous
+              else
+                echo "No 'latest' image found to tag as 'previous' in nginx."
+              fi
+
+              echo "Deploying nginx..."
+              sudo docker-compose pull nginx
+              sudo docker-compose stop nginx
+              sudo docker-compose rm -f nginx
+              sudo docker-compose up -d nginx
+            fi
 
             # Remove all dangling images
             echo "Removing dangling images..."
             sudo docker images --filter "dangling=true" --format '{{.Repository}}:{{.Tag}} {{.ID}}' | grep -vE 'latest|previous' | awk '{print $2}' | xargs -r sudo docker rmi
-
           debug: true
