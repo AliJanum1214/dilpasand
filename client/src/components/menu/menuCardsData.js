@@ -9,7 +9,7 @@ export const menuItems = [
       </>
     ),
     image:
-      "https://res.cloudinary.com/dlorogzhe/image/upload/v1749143568/gola_kabab_dt20qy.jpg",
+      "https://res.cloudinary.com/shampigoli/image/upload/v1749550106/IMG_8882_o2ng1l.jpg",
   },
   {
     category: "Drinks",
@@ -21,7 +21,7 @@ export const menuItems = [
       </>
     ),
     image:
-      "https://res.cloudinary.com/dlorogzhe/image/upload/v1749143566/bihari_boti_mbyczg.jpg",
+      "https://res.cloudinary.com/shampigoli/image/upload/v1749550107/IMG_9624_a7mlkl.jpg",
   },
   {
     category: "Desserts",
@@ -33,7 +33,7 @@ export const menuItems = [
       </>
     ),
     image:
-      "https://res.cloudinary.com/dlorogzhe/image/upload/v1749143567/paratha_roll_ervbwd.jpg",
+      "https://res.cloudinary.com/shampigoli/image/upload/v1749550107/IMG_9064_zhwbbn.jpg",
   },
   {
     category: "Custard",
@@ -45,7 +45,7 @@ export const menuItems = [
       </>
     ),
     image:
-      "https://res.cloudinary.com/dlorogzhe/image/upload/v1749143574/haleem_eywc6z.jpg",
+      "https://res.cloudinary.com/shampigoli/image/upload/v1749550106/IMG_8990_y3esqb.jpg",
   },
   {
     category: "Sweets",
@@ -57,7 +57,7 @@ export const menuItems = [
       </>
     ),
     image:
-      "https://res.cloudinary.com/dlorogzhe/image/upload/v1749143564/biryani_b5hl7o.jpg",
+      "https://res.cloudinary.com/shampigoli/image/upload/v1749550106/IMG_9097_w06hsk.jpg",
   },
   {
     category: "Ice Cream",
@@ -69,6 +69,6 @@ export const menuItems = [
       </>
     ),
     image:
-      "https://res.cloudinary.com/dlorogzhe/image/upload/v1749143571/IMG_9642_hqrojk.jpg",
+      "https://res.cloudinary.com/shampigoli/image/upload/v1749550107/IMG_9642_cjp5pw.jpg",
   },
 ];
