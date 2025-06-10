@@ -8,7 +8,8 @@ export const menuItems = [
         joints. Soft, spicy, and grilled to perfection.
       </>
     ),
-    image: "./images/menu/gola_kabab.jpg",
+    image:
+      "https://res.cloudinary.com/dlorogzhe/image/upload/v1749143568/gola_kabab_dt20qy.jpg",
   },
   {
     category: "Drinks",
@@ -19,7 +20,8 @@ export const menuItems = [
         smoky Behari masala and cooked on coals.
       </>
     ),
-    image: "./images/menu/bihari_boti.jpg",
+    image:
+      "https://res.cloudinary.com/dlorogzhe/image/upload/v1749143566/bihari_boti_mbyczg.jpg",
   },
   {
     category: "Desserts",
@@ -30,7 +32,8 @@ export const menuItems = [
         a crisp paratha—nostalgia in every bite.
       </>
     ),
-    image: "./images/menu/paratha_roll.jpg",
+    image:
+      "https://res.cloudinary.com/dlorogzhe/image/upload/v1749143567/paratha_roll_ervbwd.jpg",
   },
   {
     category: "Custard",
@@ -41,7 +44,8 @@ export const menuItems = [
         Road straight to your plate.
       </>
     ),
-    image: "./images/menu/haleem.jpg",
+    image:
+      "https://res.cloudinary.com/dlorogzhe/image/upload/v1749143574/haleem_eywc6z.jpg",
   },
   {
     category: "Sweets",
@@ -52,7 +56,8 @@ export const menuItems = [
         Biryani every Karachiite grew up with.
       </>
     ),
-    image: "./images/menu/biryani.jpg",
+    image:
+      "https://res.cloudinary.com/dlorogzhe/image/upload/v1749143564/biryani_b5hl7o.jpg",
   },
   {
     category: "Ice Cream",
@@ -63,6 +68,7 @@ export const menuItems = [
         hot at Karachi’s late-night chai spots.
       </>
     ),
-    image: "./images/menu/paratha.jpg",
+    image:
+      "https://res.cloudinary.com/dlorogzhe/image/upload/v1749143571/IMG_9642_hqrojk.jpg",
   },
 ];
