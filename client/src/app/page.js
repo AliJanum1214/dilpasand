@@ -1,30 +1,38 @@
+"use client";
+
 import AboutUsSection from "@/components/aboutUs/aboutUsSection";
 import VideoBanner from "@/components/banner/bannerVideo";
-import BlogSection from "@/components/blogs/blogSection";
-import ClientWrapper from "@/components/context/clientWrapper";
-import Faq from "@/components/faq";
 import FindUs from "@/components/findUs/findUs";
-import GallerySection from "@/components/gallery/gallerySection";
 import MapInfoSection from "@/components/map/mapInfoSection";
 import MenuSection from "@/components/menu/menuSection";
-import NewsLetterSection from "@/components/newsletter/newsLetterSection";
 import TikTokSection from "@/components/tiktok/tiktokSection";
-import Image from "next/image";
-
+import { useState } from "react";
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
       {/* <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth"> */}
-      <VideoBanner />
-      <FindUs />
-      <AboutUsSection />
-      <MenuSection />
-      <MapInfoSection />
-      <TikTokSection />
-      {/* <GallerySection /> */}
-      {/* </div> */}
-      {/* <NewsLetterSection /> */}
-      {/* <BlogSection /> */}
+      <div
+        className=""
+        style={{
+          overflow: isModalOpen ? "hidden" : "",
+          height: isModalOpen ? "90vh" : "",
+        }}
+      >
+        <VideoBanner
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        />
+        <FindUs />
+        <AboutUsSection />
+        <MenuSection />
+        <MapInfoSection />
+        <TikTokSection />
+        {/* <GallerySection /> */}
+        {/* </div> */}
+        {/* <NewsLetterSection /> */}
+        {/* <BlogSection /> */}
+      </div>
     </>
   );
 }

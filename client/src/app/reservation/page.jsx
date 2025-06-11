@@ -38,7 +38,7 @@ export default function Reservation() {
               Alternatively, you can ask for a private party using the booking
               form below.
             </p>
-            <div className="mt-6">
+            <div className="my-6 mb-20">
               <ReservationForm />
             </div>
           </div>

@@ -1,9 +1,8 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
+import ModalWrapper from "@/components/context/modalWrapper";
 
-// Gill Sans for paragraphs
 const gillSans = localFont({
   src: "../../public/fonts/Gill Sans Light.otf",
   variable: "--font-paragraph",
@@ -11,8 +10,6 @@ const gillSans = localFont({
   style: "normal",
   display: "swap",
 });
-
-// Futura Bold for headings
 const futuraBold = localFont({
   src: "../../public/fonts/Futura Book.ttf",
   variable: "--font-heading",
@@ -34,7 +31,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${gillSans.variable} ${futuraBold.variable} antialiased`}
       >
-        <Navbar />
+        <ModalWrapper />
         {children}
         <Footer />
       </body>

@@ -6,10 +6,9 @@ import ReservationModal from "../modal/reservationModal";
 
 const navLinks = [{ href: "/our-story", name: "Our Story" }];
 
-export default function Navbar() {
+export default function Navbar({ isModalOpen, setIsModalOpen }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -23,7 +22,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 h-[70px] bg-custom-primary text-white transition-shadow duration-300 ${
+      className={`fixed top-0 w-full z-10 h-[70px] bg-custom-primary text-white transition-shadow duration-300 ${
         isScrolled ? "shadow-xl" : "shadow-none"
       }`}
     >
@@ -99,9 +98,12 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-      {isModalOpen && (
-        <ReservationModal onClose={() => setIsModalOpen(false)} />
-      )}
+
+      <div className="z-50">
+        {isModalOpen && (
+          <ReservationModal onClose={() => setIsModalOpen(false)} />
+        )}
+      </div>
     </nav>
   );
 }

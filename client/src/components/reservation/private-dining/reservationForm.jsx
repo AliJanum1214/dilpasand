@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   TextField,
   Button,
@@ -20,6 +20,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { v4 as uuidv4 } from "uuid";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { X } from "lucide-react";
 
 export const DatePopup = ({ open, onClose, onDateSelect }) => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
@@ -46,12 +47,12 @@ export const DatePopup = ({ open, onClose, onDateSelect }) => {
   );
 };
 
-const ReservationForm = () => {
+const ReservationForm = ({ onClose }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    countryCode: "+92",
+    countryCode: "+44",
     date: null,
     seats: 1,
     time: "",
@@ -60,15 +61,22 @@ const ReservationForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
+  const [isCountryCodeOpen, setIsCountryCodeOpen] = useState(false);
+  const [isTimeOpen, setIsTimeOpen] = useState(false);
+
+  const countryCodeRef = useRef(null);
+  const timeRef = useRef(null);
 
   const timeSlots = [
-    "10:00 AM",
     "12:00 PM",
     "2:00 PM",
     "4:00 PM",
     "6:00 PM",
     "8:00 PM",
+    "10:00 PM",
+    "12:00 AM",
   ];
+
   const countryCodes = ["+1", "+44", "+92", "+61", "+91"];
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -112,61 +120,58 @@ const ReservationForm = () => {
         : null;
 
       const bodyData = {
-        id: uuidv4(), // Generate a new UUID
+        id: uuidv4(),
         type: "reservation",
         opt_out: 1,
         referral_source: "Google Search",
         name: formData.name,
         email: formData.email,
         phone: `${formData.countryCode}${formData.phone}`,
-        // date: formData.date ? formData.date.format("YYYY-MM-DD") : null, // Include date
         seats: formData.seats,
-        reservation_time: formattedDateTime, // Format: YYYY-MM-DD HH:mm:ss
+        reservation_time: formattedDateTime,
       };
-
-      console.log("Request body:", bodyData); // Log the payload before sending
-
       const response = await fetch(
         "https://dilpasandrestaurant.com/back/entries/insert",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(bodyData), // Stringify the body
+          body: JSON.stringify(bodyData),
         }
       );
 
-      console.log("Response status:", response.status); // Log response status
+      console.log("Response status:", response.status);
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({})); // Try to parse error response
-        console.error("Response error:", errorData); // Log server error details
+        const errorData = await response.json().catch(() => ({}));
         throw new Error(`Failed to submit reservation: ${response.statusText}`);
       }
 
       setSubmitted(true);
     } catch (error) {
-      console.error("Submission error:", error.message); // Log the error
       alert("Error submitting reservation. Please try again.");
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isCountryCodeOpen) {
+        setIsCountryCodeOpen(false);
+      }
+      if (isTimeOpen) {
+        setIsTimeOpen(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isCountryCodeOpen, isTimeOpen]);
+
   if (submitted) {
     return (
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        px={2}
-        color="white"
-      >
-        <Typography variant="h5" gutterBottom>
-          Thank You!
-        </Typography>
-        <Typography>
-          Your reservation has been submitted. Please check your email.
-        </Typography>
-      </Box>
+      <div className="bg-custom-secondary text-center flex flex-col items-center justify-center p-4 rounded-lg">
+        <h5 className="text-yellow-500 text-3xl">Thank You!</h5>
+        <p>Your reservation has been submitted. Please check your email.</p>
+      </div>
     );
   }
 
@@ -177,15 +182,14 @@ const ReservationForm = () => {
       display="flex"
       flexDirection="column"
       justifyContent="center"
-      p={3}
       maxWidth={600}
       mx="auto"
       bgcolor="#120901"
       color="white"
       borderRadius="10px"
+      className="relative"
       gap={0}
     >
-      {/* Name and Email in one row */}
       <Box display="flex" gap={2} alignItems="center">
         <TextField
           label="Name"
@@ -222,6 +226,19 @@ const ReservationForm = () => {
             onChange={handleChange}
             label="Code"
             sx={selectStyle}
+            open={isCountryCodeOpen}
+            onOpen={() => setIsCountryCodeOpen(true)}
+            onClose={() => setIsCountryCodeOpen(false)}
+            ref={countryCodeRef}
+            MenuProps={{
+              PaperProps: {
+                sx: {
+                  bgcolor: "white",
+                  color: "black",
+                  maxHeight: 300,
+                },
+              },
+            }}
           >
             {countryCodes.map((code) => (
               <MenuItem key={code} value={code}>
@@ -264,6 +281,10 @@ const ReservationForm = () => {
             onChange={handleChange}
             label="Time"
             sx={selectStyle}
+            open={isTimeOpen}
+            onOpen={() => setIsTimeOpen(true)}
+            onClose={() => setIsTimeOpen(false)}
+            ref={timeRef}
             MenuProps={{
               PaperProps: {
                 sx: {
@@ -272,15 +293,7 @@ const ReservationForm = () => {
                   maxHeight: 300,
                 },
               },
-              anchorOrigin: {
-                vertical: "bottom",
-                horizontal: "left",
-              },
-              transformOrigin: {
-                vertical: "top",
-                horizontal: "left",
-              },
-              disablePortal: true,
+              disableScrollLock: true,
             }}
           >
             {timeSlots.map((time) => (
@@ -314,17 +327,9 @@ const ReservationForm = () => {
       />
 
       {/* Submit */}
-      <Button
+      <button
         type="submit"
-        fullWidth
-        sx={{
-          mt: 3,
-          py: 1.5,
-          fontSize: "1rem",
-          fontWeight: "400",
-          bgcolor: "#aa340d",
-          color: "white",
-        }}
+        className="text-white bg-custom-secondary hover:translate-y-[4px] transition ease-in w-full p-3 flex justify-center items-center rounded-lg"
         disabled={
           !formData.name ||
           !formData.email ||
@@ -334,7 +339,7 @@ const ReservationForm = () => {
         }
       >
         Submit Reservation
-      </Button>
+      </button>
     </Box>
   );
 };

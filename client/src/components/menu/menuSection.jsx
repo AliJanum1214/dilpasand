@@ -33,14 +33,14 @@ const MenuCard = ({
       }
     >
       <div
-        className="relative z-10 py-3 h-full flex flex-col justify-between"
+        className="relative py-3 h-full flex flex-col justify-between"
         style={{ transform: isFlipped ? "scaleX(-1)" : "none" }}
       >
         <div>
           {/* <h4 className="text-lg font-semibold text-yellow-500 uppercase">
             {category}
           </h4> */}
-          <h3 className="text-lg text-center font-bold uppercase text-yellow-500 mb-2 whitespace-nowrap">
+          <h3 className="text-lg  text-center font-bold uppercase text-yellow-500 mb-2 whitespace-nowrap">
             {name.split("–").map((part, i, arr) => (
               <span key={i}>
                 {part.trim()}

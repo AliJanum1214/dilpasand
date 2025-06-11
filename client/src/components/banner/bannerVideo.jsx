@@ -7,10 +7,10 @@ import ReservationModal from "../modal/reservationModal";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function VideoBanner() {
+export default function VideoBanner({ isModalOpen, setIsModalOpen }) {
   const videoRef = useRef(null);
   const sectionRef = useRef(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -77,7 +77,7 @@ export default function VideoBanner() {
         <div className="bg-custom-primary rounded-lg">
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-custom-secondary cursor-pointer px-4 py-2 z-50 rounded-md custom-hover-bg-opacity transition pointer-events-auto"
+            className="bg-custom-secondary cursor-pointer px-4 py-2 rounded-md custom-hover-bg-opacity transition pointer-events-auto"
             style={{ height: "43px" }}
           >
             Book a Table
@@ -88,10 +88,11 @@ export default function VideoBanner() {
         <Tagline />
       </div>
 
-      {/* Render modal if state is true */}
-      {isModalOpen && (
-        <ReservationModal onClose={() => setIsModalOpen(false)} />
-      )}
+      <div className="z-50">
+        {isModalOpen && (
+          <ReservationModal onClose={() => setIsModalOpen(false)} />
+        )}
+      </div>
     </div>
   );
 }
