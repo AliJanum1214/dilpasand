@@ -12,9 +12,9 @@ import {
   CircularProgress,
   Box,
   TablePagination,
-  TextField,
 } from "@mui/material";
 import dayjs from "dayjs";
+import DateFilter from "./dateFilter";
 
 export default function ReservationFromData() {
   const [reservations, setReservations] = useState([]);
@@ -24,6 +24,11 @@ export default function ReservationFromData() {
   const [error, setError] = useState(null);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [dateFilter, setDateFilter] = useState({
+    type: "all",
+    fromDate: null,
+    toDate: null,
+  });
 
   useEffect(() => {
     const fetchReservations = async () => {
@@ -54,16 +59,44 @@ export default function ReservationFromData() {
   }, []);
 
   useEffect(() => {
-    const lowerQuery = searchQuery.toLowerCase();
-    const filtered = reservations.filter((res) =>
-      [res.name, res.email, res.phone]
-        .join(" ")
-        .toLowerCase()
-        .includes(lowerQuery)
-    );
+    let filtered = reservations;
+
+    // Apply search filter
+    if (searchQuery) {
+      const lowerQuery = searchQuery.toLowerCase();
+      filtered = filtered.filter((res) =>
+        [res.name, res.email, res.phone]
+          .join(" ")
+          .toLowerCase()
+          .includes(lowerQuery)
+      );
+    }
+
+    // Apply date filter
+    if (dateFilter.type !== "all") {
+      filtered = filtered.filter((res) => {
+        const createdAt = dayjs(res.created_at);
+        if (dateFilter.type === "today") {
+          return createdAt.isSame(dayjs(), "day");
+        } else if (dateFilter.type === "yesterday") {
+          return createdAt.isSame(dayjs().subtract(1, "day"), "day");
+        } else if (
+          dateFilter.type === "custom" &&
+          dateFilter.fromDate &&
+          dateFilter.toDate
+        ) {
+          return (
+            createdAt.isAfter(dayjs(dateFilter.fromDate).startOf("day")) &&
+            createdAt.isBefore(dayjs(dateFilter.toDate).endOf("day"))
+          );
+        }
+        return true;
+      });
+    }
+
     setFilteredReservations(filtered);
-    setPage(0); // reset to first page after search
-  }, [searchQuery, reservations]);
+    setPage(0);
+  }, [searchQuery, reservations, dateFilter]);
 
   const handleChangePage = (_, newPage) => setPage(newPage);
   const handleChangeRowsPerPage = (e) => {
@@ -104,18 +137,22 @@ export default function ReservationFromData() {
           Reservation Data
         </h4>
 
-        {/* Search Field */}
-        <div className="flex flex-col  items-start  text-left space-y-4 my-4 ">
-          <label htmlFor="search" className="text-white">
-            Search Anything
-          </label>
-          <input
-            variant="outlined"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="search ..."
-            className="bg-white border-none text-black outline-none p-3 rounded-lg max-w-sm"
-          />
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0 my-4">
+          {/* Search Field */}
+          <div className="flex flex-col items-start">
+            <label htmlFor="search" className="text-white mb-2">
+              Search Anything
+            </label>
+            <input
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search..."
+              className="bg-white border-none text-black outline-none p-3 rounded-lg max-w-sm"
+            />
+          </div>
+
+          {/* Date Filter */}
+          <DateFilter dateFilter={dateFilter} setDateFilter={setDateFilter} />
         </div>
 
         <TableContainer
@@ -164,7 +201,6 @@ export default function ReservationFromData() {
               )}
             </TableBody>
           </Table>
-          {/* Pagination */}
           <TablePagination
             component="div"
             count={filteredReservations.length}
