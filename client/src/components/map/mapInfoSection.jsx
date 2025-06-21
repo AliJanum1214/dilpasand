@@ -24,10 +24,22 @@ export default function MapInfoSection() {
         </>
       ),
       content: [
-        <ul className="list-disc text-left ml-4 space-y-3">
-          <li>Aldgate East (District, Hammersmith & City lines)</li>
-          <li>Whitechapel (Elizabeth Line)</li>
-          <li>Liverpool Street (Central, Circle, National rail)</li>
+        <ul className="list-disc text-left sm:text-base text-white leading-relaxed overflow-hidden">
+          <li className="">
+            <p className="text-sm sm:text-base text-white leading-relaxed overflow-hidden">
+              Aldgate East (District, Hammersmith & City lines)
+            </p>
+          </li>
+          <li>
+            <p className="text-sm sm:text-base text-white leading-relaxed overflow-hidden">
+              Whitechapel (Elizabeth Line)
+            </p>
+          </li>
+          <li>
+            <p className="text-sm sm:text-base text-white leading-relaxed overflow-hidden">
+              Liverpool Street (Central, Circle, National rail)
+            </p>
+          </li>
         </ul>,
       ],
     },
@@ -43,7 +55,7 @@ export default function MapInfoSection() {
             className="flex gap-2 items-center hover:underline"
           >
             <img src="./images/uber_eats_logo.png" alt="" className="w-7 h-7" />
-            Dilpasand (Whitechapel)
+            <p>Dilpasand (Whitechapel)</p>
           </Link>
         </>,
       ],
@@ -51,18 +63,18 @@ export default function MapInfoSection() {
     {
       title: "Contact",
       content: [
-        <span key="phone1" className="flex items-center gap-1 text-white">
-          <Phone size={20} /> +44 20 7247 0285
-        </span>,
-        <span key="phone2" className="flex items-center gap-1 text-white">
+        <p
+          key="phone1"
+          className="flex items-center gap-1 text-xs text-white leading-relaxed overflow-hidden"
+        >
+          +44 20 7247 0285
+        </p>,
+        <p
+          key="phone2"
+          className="flex items-center gap-1 text-sm sm:text-base text-white leading-relaxed overflow-hidden"
+        >
           <Phone size={20} /> +44 73 6865 7788
-        </span>,
-        // <span key="email1" className="flex items-center gap-1 text-white">
-        //   <Mail size={14} /> info@dilpasandrestaurant.com
-        // </span>,
-        // <span key="email2" className="flex items-center gap-1 text-white">
-        //   <Mail size={14} /> catering@dilpasandrestaurant.com
-        // </span>,
+        </p>,
       ],
     },
   ];
@@ -87,7 +99,7 @@ export default function MapInfoSection() {
 
   return (
     <section
-      className="section flex flex-col justify-center bg-custom-primary relative"
+      className="section flex flex-col justify-center bg-custom-primary relative px-4 md:px-0"
       id="visit_us"
     >
       <h2 className="text-custom-secondary text-4xl text-center font-heading uppercase mb-12">
@@ -120,7 +132,7 @@ export default function MapInfoSection() {
           className="lg:w-1/2 w-full flex flex-col space-y-6 relative"
           ref={contentRef}
         >
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {infoSections.map((section, index) => (
               <div
                 key={index}
@@ -134,17 +146,20 @@ export default function MapInfoSection() {
                   {section.title}
                 </h3>
                 {section.content.map((line, i) => (
-                  <p key={i} className="text-xs sm:text-sm text-white">
+                  <p
+                    key={i}
+                    className="text-sm sm:text-base text-white leading-relaxed overflow-hidden"
+                  >
                     {line}
                   </p>
                 ))}
               </div>
             ))}
           </div>
-          <div className="bg-custom-secondary rounded-md p-4 text-center text-white">
+          <div className="bg-custom-secondary rounded-md p-4 text-center">
             <h2 className="text-3xl text-yellow-500">Group Bookings</h2>
-            <p style={{ fontSize: "18px" }}>
-              call us for customised packages & hiring our private dining space
+            <p className="text-sm sm:text-base text-white leading-relaxed overflow-hidden my-3">
+              Call us for customized packages & hiring our private dining space
             </p>
           </div>
         </div>

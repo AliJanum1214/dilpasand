@@ -17,7 +17,7 @@ const MenuCard = ({
 }) => {
   return (
     <div
-      className={`relative w-full overflow-hidden ${
+      className={`relative w-full overflow-hidden h-[360px] md:h-[410px]   ${
         useCustomBorder ? "border-2 custom-border p-3 mt-1 mb-0.5" : "p-6"
       }`}
       style={
@@ -33,14 +33,11 @@ const MenuCard = ({
       }
     >
       <div
-        className="relative py-3 h-full flex flex-col justify-between"
+        className="relative py-3 h-full flex flex-col space-y-4"
         style={{ transform: isFlipped ? "scaleX(-1)" : "none" }}
       >
         <div>
-          {/* <h4 className="text-lg font-semibold text-yellow-500 uppercase">
-            {category}
-          </h4> */}
-          <h3 className="text-lg  text-center font-bold uppercase text-yellow-500 mb-2 whitespace-nowrap">
+          <h3 className="text-base sm:text-lg md:text-xl text-center font-bold uppercase text-yellow-500 mb-2 whitespace-nowrap">
             {name.split("–").map((part, i, arr) => (
               <span key={i}>
                 {part.trim()}
@@ -50,19 +47,16 @@ const MenuCard = ({
               </span>
             ))}
           </h3>
-
-          <p className="text-base text-justify text-white leading-relaxed mb-2">
+          <p className="text-sm sm:text-base text-white leading-relaxed h-[100px] overflow-hidden">
             {description}
           </p>
         </div>
-        <div>
-          <div className="relative w-full mb-4">
-            <img
-              src={image}
-              alt={name}
-              className="object-cover w-full h-56 rounded-md"
-            />
-          </div>
+        <div className="w-full">
+          <img
+            src={image}
+            alt={name}
+            className="object-cover w-full h-40 sm:h-44 md:h-48 rounded-md"
+          />
         </div>
       </div>
     </div>
@@ -114,23 +108,23 @@ const MenuSection = () => {
   return (
     <div
       id="menu"
-      className="pb-20 bg-custom-primary relative flex justify-center items-center"
+      className="pb-20 bg-custom-primary relative flex justify-center items-center px-4"
     >
       <div className="max-w-6xl mx-auto flex flex-col items-center w-full">
-        <h2 className="text-custom-secondary text-3xl sm:text-4xl text-center font-bold uppercase mb-8 sm:mb-12">
+        <h2 className="text-custom-secondary text-2xl sm:text-3xl md:text-4xl text-center font-bold uppercase mb-6 sm:mb-10">
           Chef's Special
         </h2>
 
-        <div className="flex items-center gap-4 w-full">
+        <div className="flex items-center gap-2 sm:gap-4 w-full">
           <button
             onClick={handlePrev}
             disabled={currentIndex === 0}
             className="text-custom-secondary hover:text-yellow-400 transition disabled:opacity-30"
           >
-            <ChevronLeft size={36} />
+            <ChevronLeft size={32} />
           </button>
 
-          <div className="relative w-full h-full min-h-[570px] flex-1 overflow-hidden">
+          <div className="relative w-full min-h-[480px] flex-1 overflow-hidden">
             <AnimatePresence custom={direction} initial={false} mode="wait">
               <motion.div
                 key={currentIndex}
@@ -139,11 +133,8 @@ const MenuSection = () => {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={{
-                  type: "tween",
-                  duration: 0.5,
-                }}
-                className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full"
+                transition={{ type: "tween", duration: 0.5 }}
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full pb-20"
               >
                 {visibleItems.map((item, index) => {
                   const positionIndex = currentIndex + index + 1;
@@ -158,7 +149,7 @@ const MenuSection = () => {
                     borderImage = "/images/second_card_border.png";
                   } else {
                     borderImage = "/images/card-border.png";
-                    isFlipped = true; // For positions 3, 6, 9 (flip card-border image)
+                    isFlipped = true;
                   }
 
                   return (
@@ -174,17 +165,24 @@ const MenuSection = () => {
                 })}
               </motion.div>
             </AnimatePresence>
-            <ExploreMenu />
+
+            {/* Fixed ExploreMenu */}
+            <div className="absolute bottom-0 left-0 w-full z-10">
+              <ExploreMenu />
+            </div>
           </div>
+
           <button
             onClick={handleNext}
             disabled={currentIndex + itemsPerPage >= menuItems.length}
             className="text-custom-secondary hover:text-yellow-400 transition disabled:opacity-30"
           >
-            <ChevronRight size={36} />
+            <ChevronRight size={32} />
           </button>
         </div>
-        <div className="flex justify-center gap-2 cursor-pointer">
+
+        {/* Dots navigation */}
+        <div className="flex justify-center gap-2 mt-6 sm:mt-8 cursor-pointer">
           {Array.from({
             length: Math.ceil(menuItems.length / itemsPerPage),
           }).map((_, i) => (

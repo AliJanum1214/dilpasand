@@ -4,8 +4,28 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import ReservationModal from "../modal/reservationModal";
 
-const navLinks = [{ href: "/our-story", name: "Our Story" }];
-
+const navLinks = [
+  {
+    name: "Our Story",
+    href: "/#our_story",
+  },
+  {
+    name: "Menu",
+    href: "#menu",
+  },
+  {
+    name: "Reservation",
+    href: "/reservation",
+  },
+  {
+    name: "Catering",
+    href: "/catering",
+  },
+  {
+    name: "Visit Us",
+    href: "/#visit_us",
+  },
+];
 export default function Navbar({ isModalOpen, setIsModalOpen }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -28,35 +48,17 @@ export default function Navbar({ isModalOpen, setIsModalOpen }) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center justify-between">
-          <ul className="hidden md:flex gap-4 lg:gap-6">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-sm lg:text-base hover:text-[#aa340d] transition-colors duration-200"
-                >
-                  <h4 className="text-[18px] relative group">
-                    {link.name}
-                    <span className="absolute bottom-0 -mb-1 left-0 w-full h-[2px] bg-custom-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center" />
-                  </h4>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div></div>
           <Link href={"/"}>
-            <img
-              src="/images/logo.png"
-              alt=""
-              className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-auto"
-            />
+            <img src="/images/logo.png" alt="" className="w-[200px]" />
           </Link>
           <div className="flex items-center">
-            <button
+            {/* <button
               className="hidden md:inline-block bg-custom-secondary px-4 py-1 rounded-md text-sm lg:text-base transition custom-hover-bg-opacity"
               onClick={() => setIsModalOpen(true)}
             >
               Book a Table
-            </button>
+            </button> */}
             <button
               className="md:hidden text-white text-2xl z-50"
               onClick={toggleMenu}

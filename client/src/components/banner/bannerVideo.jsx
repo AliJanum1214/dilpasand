@@ -64,9 +64,9 @@ export default function VideoBanner({ isModalOpen, setIsModalOpen }) {
         muted
         playsInline
         className="object-cover w-[100vw] h-[100vh] max-w-none rounded-lg"
-        src="https://res.cloudinary.com/dlorogzhe/video/upload/v1749136615/banner_xkgk79.mp4"
+        src="./banner.webm"
       />
-      <div className="absolute inset-0 text-white flex items-center flex-col justify-center pointer-events-none">
+      {/* <div className="absolute inset-0 text-white flex items-center flex-col justify-center pointer-events-none">
         <h1 className="text-3xl md:text-6xl font-bold drop-shadow-lg">
           “Karachi Roots. London Tables ”
         </h1>
@@ -83,7 +83,7 @@ export default function VideoBanner({ isModalOpen, setIsModalOpen }) {
             Book a Table
           </button>
         </div>
-      </div>
+      </div> */}
       <div className="absolute bottom-3 w-full">
         <Tagline />
       </div>

@@ -4,15 +4,31 @@ export default function MenuBar({ isFixed = true }) {
     : "relative bg-custom-secondary";
 
   const menuLinks = [
-    { href: "#menu", name: "Menu" },
-    { href: "/reservation", name: "Reservation" },
-    { href: "/catering", name: "Catering" },
-    { href: "#visit_us", name: "Visit Us" },
+    {
+      name: "Our Story",
+      href: "/#our_story",
+    },
+    {
+      name: "Menu",
+      href: "#menu",
+    },
+    {
+      name: "Reservation",
+      href: "/reservation",
+    },
+    {
+      name: "Catering",
+      href: "/catering",
+    },
+    {
+      name: "Visit Us",
+      href: "/#visit_us",
+    },
   ];
 
   return (
     <div className={baseClass}>
-      <div className="max-w-6xl mx-auto p-1 flex justify-center gap-6 flex-wrap shadow-2xl">
+      <div className="hidden md:flex max-w-6xl mx-auto p-1 justify-center gap-6 flex-wrap shadow-2xl">
         {menuLinks.map((link, index) => (
           <a
             key={index}

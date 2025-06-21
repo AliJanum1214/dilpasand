@@ -1,6 +1,7 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const TIKTOK_EMBED_SCRIPT_SRC = "https://www.tiktok.com/embed.js";
 
@@ -37,64 +38,50 @@ const tiktokVideos = [
   },
 ];
 
-const TikTokCard = ({ videoId, title, isFlipped }) => (
+const TikTokCard = ({ videoId, title }) => (
   <motion.div
-    className="relative bg-custom-primary w-full overflow-hidden rounded-xl p-4 mt-3 mb-1 border-2 custom-border"
+    className="bg-custom-primary border-2 custom-border rounded-xl p-3"
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
     viewport={{ once: true }}
   >
-    <div style={{ transform: isFlipped ? "scaleX(-1)" : "none" }}>
-      <blockquote
-        className="tiktok-embed"
-        cite={`https://www.tiktok.com/@dilpasand_london/video/${videoId}`}
-        data-video-id={videoId}
-        style={{
-          borderRadius: "20px",
-          width: "300px",
-          height: "500px",
-          margin: "6px auto",
-        }}
-      >
-        <section>
-          <a
-            target="_blank"
-            title="@dilpasand_london"
-            href="https://www.tiktok.com/@dilpasand_london?refer=embed"
-            rel="noreferrer"
-          >
-            @dilpasand_london
-          </a>{" "}
-          {title}
-        </section>
-      </blockquote>
-    </div>
+    <blockquote
+      className="tiktok-embed"
+      cite={`https://www.tiktok.com/@dilpasand_london/video/${videoId}`}
+      data-video-id={videoId}
+      style={{ borderRadius: "20px", width: "100%", height: "500px" }}
+    >
+      <section>
+        <a
+          target="_blank"
+          title="@dilpasand_london"
+          href="https://www.tiktok.com/@dilpasand_london?refer=embed"
+          rel="noreferrer"
+        >
+          @dilpasand_london
+        </a>{" "}
+        {title}
+      </section>
+    </blockquote>
   </motion.div>
 );
 
 export default function TikTokSection() {
   const containerRef = useRef(null);
   const scriptLoadedRef = useRef(false);
-
-  const parseTikTokEmbeds = () => {
-    if (window.tiktok?.parse && containerRef.current) {
-      window.tiktok.parse(containerRef.current);
-    }
-  };
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const itemsPerPage = 3;
 
   const loadTikTokScript = () => {
-    if (scriptLoadedRef.current) {
-      parseTikTokEmbeds();
-      return;
-    }
+    if (scriptLoadedRef.current) return;
 
     const existingScript = document.querySelector(
       `script[src="${TIKTOK_EMBED_SCRIPT_SRC}"]`
     );
     if (existingScript) {
       scriptLoadedRef.current = true;
-      parseTikTokEmbeds();
       return;
     }
 
@@ -103,17 +90,26 @@ export default function TikTokSection() {
     script.async = true;
     script.onload = () => {
       scriptLoadedRef.current = true;
-      parseTikTokEmbeds();
     };
     document.body.appendChild(script);
   };
 
   useEffect(() => {
-    parseTikTokEmbeds();
     loadTikTokScript();
+
+    // Function to parse TikTok embeds
+    const parseTikTok = () => {
+      if (window.tiktok?.parse && containerRef.current) {
+        window.tiktok.parse(containerRef.current);
+      }
+    };
+
+    // Initial parse after script load
+    parseTikTok();
+
+    // Set up a MutationObserver to detect changes in the container
     const observer = new MutationObserver(() => {
-      parseTikTokEmbeds();
-      setTimeout(parseTikTokEmbeds, 100);
+      parseTikTok();
     });
 
     if (containerRef.current) {
@@ -122,26 +118,129 @@ export default function TikTokSection() {
         subtree: true,
       });
     }
-    return () => observer.disconnect();
-  }, []);
+
+    // Retry parsing a few times to handle async script loading
+    const retries = 5;
+    let attempts = 0;
+    const interval = setInterval(() => {
+      parseTikTok();
+      attempts++;
+      if (attempts >= retries) {
+        clearInterval(interval);
+      }
+    }, 500);
+
+    return () => {
+      observer.disconnect();
+      clearInterval(interval);
+    };
+  }, [currentIndex]);
+
+  const visibleItems = tiktokVideos.slice(
+    currentIndex,
+    currentIndex + itemsPerPage
+  );
+
+  const variants = {
+    enter: (dir) => ({
+      x: dir > 0 ? 300 : -300,
+      opacity: 0,
+      position: "absolute",
+    }),
+    center: { x: 0, opacity: 1, position: "relative" },
+    exit: (dir) => ({
+      x: dir < 0 ? 300 : -300,
+      opacity: 0,
+      position: "absolute",
+    }),
+  };
+
+  const handleNext = () => {
+    if (currentIndex + itemsPerPage < tiktokVideos.length) {
+      setDirection(1);
+      setCurrentIndex((prev) => prev + itemsPerPage);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentIndex - itemsPerPage >= 0) {
+      setDirection(-1);
+      setCurrentIndex((prev) => prev - itemsPerPage);
+    }
+  };
 
   return (
     <div className="p-4 bg-custom-primary py-20" ref={containerRef}>
-      <div></div>
       <div className="max-w-6xl mx-auto flex flex-col items-center w-full">
-        <h2 className="text-3xl sm:text-4xl text-center font-bold uppercase mb-2 text-yellow-500">
-          Follow us On
-        </h2>
-        <div className="flex justify-center items-center">
+        <div className="flex gap-2 items-center mb-8">
+          <h2 className="text-3xl sm:text-4xl font-bold uppercase text-yellow-500">
+            Follow us On
+          </h2>
           <img
             src="/images/TikTok_logo.png"
             alt="TikTok Logo"
-            className="w-[200px] h-auto"
+            className="w-[140px] h-auto"
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-6xl mx-auto">
-          {tiktokVideos.map((video, index) => (
-            <TikTokCard key={video.id} videoId={video.id} title={video.title} />
+
+        <div className="flex items-center w-full gap-3">
+          <button
+            onClick={handlePrev}
+            disabled={currentIndex === 0}
+            className="text-yellow-500 hover:text-white transition disabled:opacity-30"
+          >
+            <ChevronLeft size={36} />
+          </button>
+
+          <div className="relative w-full min-h-[550px] overflow-hidden">
+            <AnimatePresence custom={direction} initial={false} mode="wait">
+              <motion.div
+                key={currentIndex}
+                custom={direction}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ type: "tween", duration: 0.5 }}
+                className="grid grid-cols-1 md:grid-cols-3 gap-4"
+              >
+                {visibleItems.map((video) => (
+                  <TikTokCard
+                    key={video.id}
+                    videoId={video.id}
+                    title={video.title}
+                  />
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <button
+            onClick={handleNext}
+            disabled={currentIndex + itemsPerPage >= tiktokVideos.length}
+            className="text-yellow-500 hover:text-white transition disabled:opacity-30"
+          >
+            <ChevronRight size={36} />
+          </button>
+        </div>
+
+        {/* Dots */}
+        <div className="flex justify-center gap-2 mt-6 cursor-pointer">
+          {Array.from({
+            length: Math.ceil(tiktokVideos.length / itemsPerPage),
+          }).map((_, i) => (
+            <div
+              key={i}
+              onClick={() => {
+                setDirection(i > currentIndex / itemsPerPage ? 1 : -1);
+                setCurrentIndex(i * itemsPerPage);
+              }}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                currentIndex / itemsPerPage === i
+                  ? "bg-yellow-500 scale-110"
+                  : "bg-gray-400 hover:bg-yellow-500"
+              }`}
+            />
           ))}
         </div>
       </div>

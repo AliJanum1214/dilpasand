@@ -1,7 +1,7 @@
 export const menuItems = [
   {
     category: "Food",
-    name: "Gola Kebab – Delhi Style",
+    name: "Gola Kebab Delhi Style",
     description: (
       <>
         Juicy beef kebabs, Delhi-style, just like the ones from old Karachi BBQ
@@ -21,11 +21,11 @@ export const menuItems = [
       </>
     ),
     image:
-      "https://res.cloudinary.com/shampigoli/image/upload/v1749550107/IMG_9624_a7mlkl.jpg",
+      "https://res.cloudinary.com/shampigoli/image/upload/v1749550107/IMG_9064_zhwbbn.jpg",
   },
   {
     category: "Desserts",
-    name: "Silver Spoon – Paratha Roll",
+    name: "Silver Spoon Paratha Roll",
     description: (
       <>
         A Karachi classic from the streets of Tariq Road. Spicy kebab wrapped in
@@ -33,11 +33,11 @@ export const menuItems = [
       </>
     ),
     image:
-      "https://res.cloudinary.com/shampigoli/image/upload/v1749550107/IMG_9064_zhwbbn.jpg",
+      "https://res.cloudinary.com/shampigoli/image/upload/v1749550107/IMG_9624_a7mlkl.jpg",
   },
   {
     category: "Custard",
-    name: "Burns Road – Haleem",
+    name: "Burns Road Haleem",
     description: (
       <>
         Thick, hearty, and full of flavour—our haleem brings the taste of Burns
@@ -49,7 +49,7 @@ export const menuItems = [
   },
   {
     category: "Sweets",
-    name: "Karachi Student – Biryani",
+    name: "Karachi Student Biryani",
     description: (
       <>
         Fragrant rice, spiced chicken, and soft aloo—just like the Student
