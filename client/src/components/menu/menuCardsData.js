@@ -25,7 +25,7 @@ export const menuItems = [
   },
   {
     category: "Desserts",
-    name: "Silver Spoon Paratha Roll",
+    name: "Silver Spoon Paratha",
     description: (
       <>
         A Karachi classic from the streets of Tariq Road. Spicy kebab wrapped in

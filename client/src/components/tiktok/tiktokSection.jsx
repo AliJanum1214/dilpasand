@@ -1,159 +1,40 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
-const TIKTOK_EMBED_SCRIPT_SRC = "https://www.tiktok.com/embed.js";
+import { TikTokEmbed } from "react-social-media-embed";
 
 const tiktokVideos = [
-  {
-    id: "7459853944769088801",
-    title: "Karachi Silver Spoon and hot n spicy paratha roll now in London!",
-  },
-  { id: "7440560351898373408", title: "Karachi gola kebab with lacha paratha" },
-  { id: "7444219634976443680", title: "Authentic Karachi biryani in London" },
-  {
-    id: "7509988209032531222",
-    title: "Pakistani Raan Roast platter in London for Eid",
-  },
-  {
-    id: "7497665418153168150",
-    title: "The famous Karachi Koila Karahi now in London",
-  },
-  {
-    id: "7492499679704304918",
-    title: "Burns Road Karachi's legendary Waheed Kebab Fry now in London!",
-  },
-  {
-    id: "7489184668932214039",
-    title: "PAKISTANI TAWA TAKA TAK NOW IN LONDON!",
-  },
-  {
-    id: "7487250103493774614",
-    title: "Spending Eid in London away from your loved ones in Pakistan?",
-  },
-  {
-    id: "7482879992188177686",
-    title: "Pakistani street style tawa maghaz masala in London",
-  },
+  { id: "7459853944769088801", title: "Silver Spoon Roll in London" },
+  { id: "7440560351898373408", title: "Gola Kebab with Lacha Paratha" },
+  { id: "7444219634976443680", title: "Karachi Biryani in London" },
+  { id: "7441659993289395488", title: "Lahori Yakhni Pulao in London" },
+  { id: "7497665418153168150", title: "Koila Karahi in London" },
+  { id: "7492499679704304918", title: "Waheed Kebab Fry" },
+  { id: "7489184668932214039", title: "Tawa Taka Tak" },
+  { id: "7487250103493774614", title: "Eid in London" },
+  { id: "7482879992188177686", title: "Tawa Maghaz Masala" },
 ];
 
-const TikTokCard = ({ videoId, title }) => (
-  <motion.div
-    className="bg-custom-primary border-2 custom-border rounded-xl p-3"
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    viewport={{ once: true }}
-  >
-    <blockquote
-      className="tiktok-embed"
-      cite={`https://www.tiktok.com/@dilpasand_london/video/${videoId}`}
-      data-video-id={videoId}
-      style={{ borderRadius: "20px", width: "100%", height: "500px" }}
-    >
-      <section>
-        <a
-          target="_blank"
-          title="@dilpasand_london"
-          href="https://www.tiktok.com/@dilpasand_london?refer=embed"
-          rel="noreferrer"
-        >
-          @dilpasand_london
-        </a>{" "}
-        {title}
-      </section>
-    </blockquote>
-  </motion.div>
-);
+const TikTokCard = ({ videoId, title }) => {
+  const videoUrl = `https://www.tiktok.com/@dilpasand_london/video/${videoId}`;
+
+  return (
+    <div className="bg-custom-primary border-2 custom-border rounded-xl py-3  h-full">
+      <TikTokEmbed
+        url={videoUrl}
+        width={300}
+        height={570}
+        className="mx-auto"
+      />
+    </div>
+  );
+};
 
 export default function TikTokSection() {
-  const containerRef = useRef(null);
-  const scriptLoadedRef = useRef(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const itemsPerPage = 3;
-
-  const loadTikTokScript = () => {
-    if (scriptLoadedRef.current) return;
-
-    const existingScript = document.querySelector(
-      `script[src="${TIKTOK_EMBED_SCRIPT_SRC}"]`
-    );
-    if (existingScript) {
-      scriptLoadedRef.current = true;
-      return;
-    }
-
-    const script = document.createElement("script");
-    script.src = TIKTOK_EMBED_SCRIPT_SRC;
-    script.async = true;
-    script.onload = () => {
-      scriptLoadedRef.current = true;
-    };
-    document.body.appendChild(script);
-  };
-
-  useEffect(() => {
-    loadTikTokScript();
-
-    // Function to parse TikTok embeds
-    const parseTikTok = () => {
-      if (window.tiktok?.parse && containerRef.current) {
-        window.tiktok.parse(containerRef.current);
-      }
-    };
-
-    // Initial parse after script load
-    parseTikTok();
-
-    // Set up a MutationObserver to detect changes in the container
-    const observer = new MutationObserver(() => {
-      parseTikTok();
-    });
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current, {
-        childList: true,
-        subtree: true,
-      });
-    }
-
-    // Retry parsing a few times to handle async script loading
-    const retries = 5;
-    let attempts = 0;
-    const interval = setInterval(() => {
-      parseTikTok();
-      attempts++;
-      if (attempts >= retries) {
-        clearInterval(interval);
-      }
-    }, 500);
-
-    return () => {
-      observer.disconnect();
-      clearInterval(interval);
-    };
-  }, [currentIndex]);
-
-  const visibleItems = tiktokVideos.slice(
-    currentIndex,
-    currentIndex + itemsPerPage
-  );
-
-  const variants = {
-    enter: (dir) => ({
-      x: dir > 0 ? 300 : -300,
-      opacity: 0,
-      position: "absolute",
-    }),
-    center: { x: 0, opacity: 1, position: "relative" },
-    exit: (dir) => ({
-      x: dir < 0 ? 300 : -300,
-      opacity: 0,
-      position: "absolute",
-    }),
-  };
 
   const handleNext = () => {
     if (currentIndex + itemsPerPage < tiktokVideos.length) {
@@ -169,8 +50,21 @@ export default function TikTokSection() {
     }
   };
 
+  const visibleVideos = tiktokVideos.slice(
+    currentIndex,
+    currentIndex + itemsPerPage
+  );
+
+  const totalBatches = Math.ceil(tiktokVideos.length / itemsPerPage);
+
+  const variants = {
+    enter: (dir) => ({ x: dir > 0 ? 300 : -300, opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (dir) => ({ x: dir < 0 ? 300 : -300, opacity: 0 }),
+  };
+
   return (
-    <div className="p-4 bg-custom-primary py-20" ref={containerRef}>
+    <div className="p-4 bg-custom-primary py-20">
       <div className="max-w-6xl mx-auto flex flex-col items-center w-full">
         <div className="flex gap-2 items-center mb-8">
           <h2 className="text-3xl sm:text-4xl font-bold uppercase text-yellow-500">
@@ -192,10 +86,10 @@ export default function TikTokSection() {
             <ChevronLeft size={36} />
           </button>
 
-          <div className="relative w-full min-h-[550px] overflow-hidden">
+          <div className="relative w-full min-h-[550px]">
             <AnimatePresence custom={direction} initial={false} mode="wait">
               <motion.div
-                key={currentIndex}
+                key={`batch-${currentIndex}`}
                 custom={direction}
                 variants={variants}
                 initial="enter"
@@ -204,7 +98,7 @@ export default function TikTokSection() {
                 transition={{ type: "tween", duration: 0.5 }}
                 className="grid grid-cols-1 md:grid-cols-3 gap-4"
               >
-                {visibleItems.map((video) => (
+                {visibleVideos.map((video) => (
                   <TikTokCard
                     key={video.id}
                     videoId={video.id}
@@ -224,24 +118,24 @@ export default function TikTokSection() {
           </button>
         </div>
 
-        {/* Dots */}
         <div className="flex justify-center gap-2 mt-6 cursor-pointer">
-          {Array.from({
-            length: Math.ceil(tiktokVideos.length / itemsPerPage),
-          }).map((_, i) => (
-            <div
-              key={i}
-              onClick={() => {
-                setDirection(i > currentIndex / itemsPerPage ? 1 : -1);
-                setCurrentIndex(i * itemsPerPage);
-              }}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                currentIndex / itemsPerPage === i
-                  ? "bg-yellow-500 scale-110"
-                  : "bg-gray-400 hover:bg-yellow-500"
-              }`}
-            />
-          ))}
+          {Array.from({ length: totalBatches }).map((_, i) => {
+            const batchStart = i * itemsPerPage;
+            return (
+              <div
+                key={i}
+                onClick={() => {
+                  setDirection(batchStart > currentIndex ? 1 : -1);
+                  setCurrentIndex(batchStart);
+                }}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  currentIndex === batchStart
+                    ? "bg-yellow-500 scale-110"
+                    : "bg-gray-400 hover:bg-yellow-500"
+                }`}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

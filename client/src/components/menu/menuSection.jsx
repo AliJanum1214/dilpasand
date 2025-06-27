@@ -17,8 +17,8 @@ const MenuCard = ({
 }) => {
   return (
     <div
-      className={`relative w-full overflow-hidden h-[360px] md:h-[410px]   ${
-        useCustomBorder ? "border-2 custom-border p-3 mt-1 mb-0.5" : "p-6"
+      className={`relative w-full overflow-hidden ${
+        useCustomBorder ? "border-2 custom-border p-2 mt-1 mb-0.5" : "p-6"
       }`}
       style={
         !useCustomBorder
@@ -33,29 +33,22 @@ const MenuCard = ({
       }
     >
       <div
-        className="relative py-3 h-full flex flex-col space-y-4"
+        className="relative px-1 md:px-2 flex flex-col justify-start h-full"
         style={{ transform: isFlipped ? "scaleX(-1)" : "none" }}
       >
         <div>
-          <h3 className="text-base sm:text-lg md:text-xl text-center font-bold uppercase text-yellow-500 mb-2 whitespace-nowrap">
-            {name.split("–").map((part, i, arr) => (
-              <span key={i}>
-                {part.trim()}
-                {i < arr.length - 1 && (
-                  <span className="text-custom-secondary mx-1">–</span>
-                )}
-              </span>
-            ))}
+          <h3 className="text-base sm:text-lg md:text-xl text-center font-bold uppercase text-yellow-500 mb-2">
+            {name}
           </h3>
-          <p className="text-sm sm:text-base text-white leading-relaxed h-[100px] overflow-hidden">
+          <p className="text-sm sm:text-base text-white leading-relaxed overflow-hidden mb-4">
             {description}
           </p>
         </div>
-        <div className="w-full">
+        <div className="w-full mt-auto">
           <img
             src={image}
             alt={name}
-            className="object-cover w-full h-40 sm:h-44 md:h-48 rounded-md"
+            className="object-cover w-full h-52 rounded-md"
           />
         </div>
       </div>
@@ -115,16 +108,20 @@ const MenuSection = () => {
           Chef's Special
         </h2>
 
-        <div className="flex items-center gap-2 sm:gap-4 w-full">
-          <button
-            onClick={handlePrev}
-            disabled={currentIndex === 0}
-            className="text-custom-secondary hover:text-yellow-400 transition disabled:opacity-30"
-          >
-            <ChevronLeft size={32} />
-          </button>
+        <div className="w-full flex justify-between items-center gap-4">
+          {/* Left Arrow */}
+          <div className="flex items-center justify-center">
+            <button
+              onClick={handlePrev}
+              disabled={currentIndex === 0}
+              className="text-custom-secondary hover:text-yellow-400 transition disabled:opacity-30"
+            >
+              <ChevronLeft size={32} />
+            </button>
+          </div>
 
-          <div className="relative w-full min-h-[480px] flex-1 overflow-hidden">
+          {/* Cards */}
+          <div className="relative w-full  flex-1 overflow-hidden">
             <AnimatePresence custom={direction} initial={false} mode="wait">
               <motion.div
                 key={currentIndex}
@@ -134,7 +131,7 @@ const MenuSection = () => {
                 animate="center"
                 exit="exit"
                 transition={{ type: "tween", duration: 0.5 }}
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full pb-20"
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full pb-[60px]"
               >
                 {visibleItems.map((item, index) => {
                   const positionIndex = currentIndex + index + 1;
@@ -166,19 +163,24 @@ const MenuSection = () => {
               </motion.div>
             </AnimatePresence>
 
-            {/* Fixed ExploreMenu */}
-            <div className="absolute bottom-0 left-0 w-full z-10">
-              <ExploreMenu />
+            {/* Fixed ExploreMenu with reserved space */}
+            <div className="absolute bottom-0 left-0 w-full z-10 pointer-events-none">
+              <div className="pointer-events-auto">
+                <ExploreMenu />
+              </div>
             </div>
           </div>
 
-          <button
-            onClick={handleNext}
-            disabled={currentIndex + itemsPerPage >= menuItems.length}
-            className="text-custom-secondary hover:text-yellow-400 transition disabled:opacity-30"
-          >
-            <ChevronRight size={32} />
-          </button>
+          {/* Right Arrow */}
+          <div className="flex items-center justify-center">
+            <button
+              onClick={handleNext}
+              disabled={currentIndex + itemsPerPage >= menuItems.length}
+              className="text-custom-secondary hover:text-yellow-400 transition disabled:opacity-30"
+            >
+              <ChevronRight size={32} />
+            </button>
+          </div>
         </div>
 
         {/* Dots navigation */}
